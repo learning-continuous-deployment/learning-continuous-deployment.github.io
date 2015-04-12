@@ -2,7 +2,7 @@
 layout: page
 title: About us
 permalink: /about/
-banner_image: sample-banner-image-2.jpg
+banner_image: about.jpg
 banner_image_alt: About us
 ---
 
@@ -13,14 +13,8 @@ For this purpose, we are going to set up a deployment chain that comprises inclu
 
 ### Contact us
 
-Say `Hello` to
-<ul>
-	<li><a href="mailto:ap077@hdm-stuttgart.de">Arno</a></li>
-	<li><a href="mailto:jg090@hdm-stuttgart.de">Jan</a></li>
-	<li><a href="mailto:mo033@hdm-stuttgart.de">Marius</a></li>
-	<li><a href="mailto:mn033@hdm-stuttgart.de">Markus</a></li>
-	<li><a href="mailto:sh228@hdm-stuttgart.de">Stefanie</a></li>
-</ul>
+Say `Hello` to <a href="mailto:ap077@hdm-stuttgart.de">Arno</a>, <a href="mailto:jg090@hdm-stuttgart.de">Jan</a>, <a href="mailto:mo033@hdm-stuttgart.de">Marius</a>,
+<a href="mailto:mn033@hdm-stuttgart.de">Markus</a> and <a href="mailto:sh228@hdm-stuttgart.de">Stefanie</a>.
 
 [hdm]: https://www.hdm-stuttgart.de
 [git]: http://git-scm.com
