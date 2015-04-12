@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
-date:   2015-01-01 0:00:55
-categories: jekyll update
+title:  "Setting up a Blog on GitHub Pages"
+date:   2015-04-12 13:49:00
+categories: jekyll blog
 banner_image: sample-banner-image-1.jpg
 comments: true
 ---
