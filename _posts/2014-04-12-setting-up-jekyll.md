@@ -5,7 +5,7 @@ date:   2015-04-12 13:49:00
 categories: jekyll blog GitHub-Pages
 banner_image: sample-banner-image-1.jpg
 comments: true
-author: Testname
+author_name: Marius
 ---
 You will find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 

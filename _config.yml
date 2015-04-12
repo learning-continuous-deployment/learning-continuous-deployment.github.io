@@ -7,7 +7,7 @@ description: > # this means to ignore newlines until "baseurl:"
   and wanna have some fun with continuous deployment. :-)
 baseurl: # the subpath of your site, e.g. /blog/
 url: "http://learning-continuous-deployment.github.io" # the base hostname & protocol for your site
-logourl: /assets/images/logo.png # Site logo
+logourl: # /assets/images/logo.png # Site logo
 author: 
 author_thumbnail: /assets/images/hdm-logo.png # Author avatar
 # Theme customization - please change from the defaults!
