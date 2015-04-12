@@ -46,13 +46,13 @@ As mentioned above, posts are written in *markdown*. If you are not familiar wit
 
 There are many online tools which provides a WYSIWGY editor. A good markdown editor is [Dillinger](http://dillinger.io). It has a preview window where you can see the interpreted markdown code.
 
-A special feature of Jekyll is code highlighting. To highlight any code, surround it by `{% highlight ruby %}` and `{% endhighlight %}`. 
+A special feature of Jekyll is code highlighting. Check out the source code of this post to see how it's done.
 
-    {% highlight ruby %}
-    def print_hi(name)
-      puts "Hi, #{name}"
-    end
-    print_hi('Tom')
-    {% endhighlight %}
+{% highlight ruby %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+{% endhighlight %}
 
 When you're done writing the post. Commit and push the file into the repository and thats it.
