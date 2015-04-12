@@ -25,7 +25,7 @@ To add new posts, simply add a file in the `_posts` directory that follows the c
 
 The top of the file is a kind of a header (containing details of the post like title, date, keywords) following by the post itself. You can simply copy the example post below and change the attributes. `categories` and `banner_image` are optional fields.
 
-The attribute `banner_image` defines the image which is shown on the top. Here, you have to specify the filename of the image. The image itself has to be located in the directory `/assets/images` of the repository.
+The attribute `banner_image` defines the image which is shown on the top. Here, you have to specify the filename of the image. The image itself has to be located in the directory `/assets/images` of the repository. A good source for free images is [StockSnap](https://stocksnap.io).
 
 ### Example blog post
 
