@@ -2,7 +2,7 @@
 layout: post
 title:  "Setting up a Blog on GitHub Pages"
 date:   2015-04-12 13:49:00
-categories: jekyll blog
+categories: jekyll blog "GitHub Pages"
 banner_image: sample-banner-image-1.jpg
 comments: true
 ---
