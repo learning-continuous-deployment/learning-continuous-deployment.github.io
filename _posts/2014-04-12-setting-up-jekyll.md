@@ -42,7 +42,7 @@ The attribute `banner_image` defines the image which is shown on the top. Here, 
     
 ### Writing a post
 
-As mentioned above, posts are written in *markdown*. If you are not familiar with it, you can take a look at this [cheatsheep](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) containing all important commands.
+As mentioned above, posts are written in *markdown*. If you are not familiar with it, you can take a look at this [cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) containing all important commands.
 
 There are many online tools which provides a WYSIWGY editor. A good markdown editor is [Dillinger](http://dillinger.io). It has a preview window where you can see the interpreted markdown code.
 
