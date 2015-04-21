@@ -46,12 +46,11 @@ In general Jenkins monitors the execution of predefined jobs, such as testing or
 
 You will need a JRE 1.6 or later. As we are using a Debian-based distribution, we could [install Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu) through apt-get by simply putting these lines in the terminal on our server:
 
+```
 > wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
-
 > sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
-
 > sudo apt-get update
-
 > sudo apt-get install jenkins
+```
 
 For future reference Jenkins will be installed on our server *continuousdeployment-1*. 
