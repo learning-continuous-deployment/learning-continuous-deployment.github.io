@@ -8,6 +8,8 @@ comments: true
 author_name: Steffi
 ---
 
+
+
 Hi there! This will be my very first blog post. Continue reading if you are unfamiliar with Docker or Jenkins. To get started we provide you with some general information about both tools regarding continuous deployment and their installation.
 
 ## Docker
@@ -31,7 +33,7 @@ For future reference Docker will be installed on our server *continuousdeploymen
 
 Errors that occured in our setup: 
 
-* Make sure the environment variable of GitHub's ssh.exe is set correctly otherwise add it to your path (set PATH=%PATH%;C:\Program Files (x86)\Git\bin) 
+* Make sure the environment variable of GitHub's ssh.exe is set correctly otherwise add it to your path `set PATH=%PATH%;C:\Program Files (x86)\Git\bin` 
 * Installing Docker on a VM with Ubuntu 14.04 requires a Kernel Version > 3.10 
 
 
@@ -46,9 +48,9 @@ In general Jenkins monitors the execution of predefined jobs, such as testing or
 
 You will need a JRE 1.6 or later. As we are using a Debian-based distribution, we could [install Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu) through apt-get by simply putting these lines in the terminal on our server:
 
-> wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add - 
-> sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
-> sudo apt-get update
-> sudo apt-get install jenkins
+    wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add - 
+    sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+    sudo apt-get update
+    sudo apt-get install jenkins
 
 For future reference Jenkins will be installed on our server *continuousdeployment-1*. 
