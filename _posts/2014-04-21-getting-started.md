@@ -9,40 +9,45 @@ author_name: Steffi
 ---
 
 
-
-Hi there! This will be my very first blog post. Continue reading if you are unfamiliar with Docker or Jenkins. To get started we provide you with some general information about both tools regarding continuous deployment and their installation.
+Hi there! This will be my very first blog post. Continue reading if you are unfamiliar with Docker or Jenkins. To get started we provide you with some general information about both tools regarding their installation and the continuous deployment process.
 
 ## Docker
 
-In general Docker provides a container based solution for virtualisation. You could use it to develop, ship and run applications. Furthermore you can integrate Docker into a continuous deployment workflow. It also helps to set up a testing environment so you can run multiple apps on several operating systems - on the same server. 
+In general Docker provides a container based solution for virtualisation. A container isolates a process so it seems to run on a standalone OS, although it still runs on the same OS as its host and therefore shares the same kernel. You could use it to develop, ship and run applications. Furthermore you can integrate Docker into a continuous deployment workflow. It also helps to set up a testing environment so you can run multiple apps on several operating systems - on the same server. 
+
+Is Docker then the same as a VM? No, beause a Docker image is basically just a filesystem, so you can only run one command in the container, whereas a VM image can have many running services. 
 
 The backend consists of a Linux-Container (LXC) that is responsible for managing the tasks. A LXC itself is a collection of functions that are offered by the Linux-Kernel due to the purpose of Sandboxing. Ordinarily a Docker Container is a full file system of a Linux installation. The focus is on the application itself rather than on the container or even the container's operating system. 
-This virtualisation technique is based on the usage of Cgroups and Namespacing, both coming from LXC. Cgroups (Control Groups) are Kernel functions to define process groups to restrict resources (such as RAM or Disc I/O) by a specified group. Namespacing focuses the security as single processes or Cgroups can be hidden from others. 
+This virtualisation technique is based on the usage of Cgroups and Namespacing, both coming from LXC. Cgroups (Control Groups) are Kernel functions to define process groups to restrict resources (such as RAM or Disc I/O) by a specified group. Namespacing focuses the security as single processes or Cgroups can be hidden from others.
 
-Thus your application will be deployed as a Docker Container. Docker files are responsible for the configuration of these containers and allow you to create an automated build system. 
+### Dockerfiles
+
+Thus your application can be deployed as a Docker Container. Docker files are responsible for the configuration of these containers and allow you to create an automated build system. They are written in a Domain Specific Language (DSL) and contain instructions to set up a Docker image. 
+
+### DockerHub
+
+[DockerHub](https://hub.docker.com) is the public repository of all Docker images that can be pulled. Any user can push images as well but needs to be registered on Docker. 
 
 
 ###Installation
 
 There is a well documented [installation guide](https://docs.docker.com/installation/#installation) on the Docker website itself. To get to know the first commands you could also go through their [tutorial](https://www.docker.com/tryit/#).
 
-For future reference Docker will be installed on our server *continuousdeployment-2*. On both our servers (Docker and Jenkins) runs Ubuntu 14.04 with the Kernel Version 3.13.
-
+For future reference Docker will be installed on our server *continuousdeployment-2*. On both our servers (Docker and Jenkins) run Ubuntu 14.04 with the Kernel Version 3.13.
 
 ### Possible Errors 
 
 Errors that occured in our setup: 
-
 * Make sure the environment variable of GitHub's ssh.exe is set correctly otherwise add it to your path `set PATH=%PATH%;C:\Program Files (x86)\Git\bin` 
 * Installing Docker on a VM with Ubuntu 14.04 requires a Kernel Version > 3.10 
 
 
 ## Jenkins and Git
 
-Another tool in our continuous deployment process will be Jenkins. We will use a Jenkins integration server as a trigger. A push in our repository will trigger the Jenkins server so that we are able to get a docker environment. This can be achieved by the [Docker Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin) for Jenkins. 
+Another tool in our continuous deployment process will be Jenkins, originally called Hudson. We will use a Jenkins integration server as a trigger. A push in our repository will trigger the Jenkins server so that we are able to get a docker environment. This can be achieved by the [Docker Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin) for Jenkins. 
 To be able to trigger a Jenkins build with a Git push you need to install a [Git Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin) as well. 
 
-In general Jenkins monitors the execution of predefined jobs, such as testing or building software projects. Therefore jenkins is a popular tool for continuous integration especially considering the execution with automated tests. It provides an continuous integration system to make it easier to integrate changers for a fresh build. Due to build automation the productivity will be increased. 
+In general Jenkins monitors the execution of predefined jobs, such as testing or building software projects. Therefore jenkins is a popular tool for continuous integration especially considering the execution with automated tests. It provides an continuous integration system to make it easier to integrate changers for a fresh build. Due to build automation the productivity will be increased. There are many free plugins to use and furtheremore it is quite flexible and easy to adapt to your own purposes. 
 
 ###Installation
 
