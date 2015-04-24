@@ -3,7 +3,7 @@ layout: post
 title:  "Exporting Docker images to a remote machine"
 date:   2015-04-24 19:00:00
 categories: docker images dockerfile
-banner_image: 
+banner_image: export-docker.png
 comments: true
 author_name: Marius
 ---
