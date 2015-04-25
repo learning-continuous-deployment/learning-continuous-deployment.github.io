@@ -22,7 +22,14 @@ Docker provides the possibility to save images to a *tar* archive. For that purp
     Save an image(s) to a tar archive (streamed to STDOUT by default)
         -o, --output=""    Write to a file, instead of STDOUT
          
-If we assume that the image we want to export is named *myimage* the command would be one the following: `docker save -o exportedImage.tar myimage` or `docker save myimage > exportedImage.tar`
+If we assume that the image we want to export is named *myimage* the command would be one the following:
+
+    docker save -o exportedImage.tar myimage
+	
+or
+
+    docker save myimage > exportedImage.tar
+
 
 By doing this, we stored the image in the `exportedImage.tar` archive. Now, we can transfer this to a remote machine.
 
