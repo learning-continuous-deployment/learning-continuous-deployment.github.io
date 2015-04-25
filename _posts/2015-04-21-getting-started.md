@@ -47,6 +47,9 @@ Errors that occured in our setup:
 Another tool in our continuous deployment process will be Jenkins, originally called Hudson. We will use a Jenkins integration server as a trigger. A push in our repository will trigger the Jenkins server so that we are able to get a docker environment. This can be achieved by the [Docker Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin) for Jenkins. 
 To be able to trigger a Jenkins build with a Git push you need to install a [Git Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin) as well. 
 
+Our general continuous deployment workflow will look like the following:
+![Continuous Deployment Workflow]({{site.url}}/assets/images/deployment_workflow.jpg)
+
 In general Jenkins monitors the execution of predefined jobs, such as testing or building software projects. Therefore jenkins is a popular tool for continuous integration especially considering the execution with automated tests. It provides an continuous integration system to make it easier to integrate changers for a fresh build. Due to build automation the productivity will be increased. There are many free plugins to use and furtheremore it is quite flexible and easy to adapt to your own purposes. 
 
 ###Installation
