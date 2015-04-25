@@ -8,18 +8,75 @@ comments: true
 author_name: Steffi, Marius, Markus
 ---
 
-This post will explain how you can setup a Jenkins job that will build a Docker image which is defined by a dockerfile. Later, it will be deployed onto a remote server, so our application will be running in an own container on its own machine. 
+This post will explain how you can setup a Jenkins job that will build a Docker image which is defined by a dockerfile. Later, it will be deployed onto a remote server, so our application will be running in an own container on its own machine.
 
 # Our Project and the Dockerfile
-In this section, we demonstrate two different approaches to build a docker container. The first one makes use of the [Docker Hub](https://hub.docker.com). Docker Hub is a platform where you can store and publish predefined docker images. Those images can downloaded by other users and executed or used as fundament for future images, respectively. The other approach is to create a Dockerfile where an image will be created based on a plain Linux image like Ubuntu. A Dockerfile is a file consisting of a sequence of various Docker command which describes the process of building an specific image.
+In this section, we demonstrate two different approaches to build a docker container. The first one makes use of the [Docker Hub](https://hub.docker.com). Docker Hub is a platform where you can store and publish predefined docker images. Those images can be downloaded by other users and executed or used as fundament for future images, respectively. The other approach is to create a Dockerfile where an image will be created based on a plain Linux image like Ubuntu. A Dockerfile is a file consisting of a sequence of various Docker commands which describe the process of building an specific image.
 
-### Using Docker Hub
-As our project is written in *python* and using the Django framework, we defined a docker image containing all required dependencies like *python*, *Django*... and submitted it to Docker Hub. This image will be downloaded and processed by the following *Dockerfile*.
+### Pulling a predifined image from Docker Hub
+As our project is written in *python* and using the Django framework, as a first step we could make use of Docker Hub to find a suitable image that already contains essential components for a quick setup.
 
-    FROM django:python2-onbuild 
-    RUN pip install --upgrade pip
-    
-Other dependencies can be found in the file *requirements.txt*, so we are able to use Python dependencies such as *numpy* or *matplotlib*. 
+Therefore we visit the [Docker Registy](https://registry.hub.docker.com) and search for *Django*.
+
+![Docker Hub searchfield]({{site.url}}/assets/images/docker_hub/searchfield.png)
+
+As a result Docker Hub lists all the images that might have something to do with Django. The blue Tag on the first repository signals *official* images that have been reviewed and approved by docker staff members. They have to follow special [guidlines](https://docs.docker.com/docker-hub/official_repos/).
+
+![Docker Hub search results]({{site.url}}/assets/images/docker_hub/searchresults.png)
+
+We are going to use the official Django image. By clicking on the repo we can view installation guidelines and other information. In this case, there are several images available i.e. with different Python versions preinstalled.
+
+![Docker Hub Django repo]({{site.url}}/assets/images/docker_hub/django_repo.png)
+
+As our Django app is written in Python_v2 we choose the image *django:python2-onbuild*. ONBUILD is a docker technique to run additional triggers after the image has been setup in a container. We can view these triggers by inspecting the image (look for the *OnBuild* section).
+
+    docker inspect django:python2-onbuild
+
+In our case:
+
+    "OnBuild": [
+                "COPY requirements.txt /usr/src/app/",
+                "RUN pip install -r requirements.txt",
+                "COPY . /usr/src/app"
+            ],
+
+This means that a `requirements.txt` is needed inside of our projects root folder. As content of the textfile we define all our project dependencies such as *numpy* or *matplotlib*:
+
+    django
+    git+https://github.com/jgru/training_monitoring.git
+    xlrd
+    numpy
+    matplotlib
+    pylatex
+    click
+
+Finally we write our `Dockerfile` and place it in the root folder as well, it will only contain one line:
+
+    FROM django:python2-onbuild
+
+We can then build and run the Docker image. (Make sure that you run the build command inside of the projects root folder):
+
+    docker build -t my-django-app .
+    docker run --name some-django-app -p 8000:8000 -d my-django-app
+
+Now we will test our app by visiting http://localhost:8000 in a browser.
+
+### Contributing to Docker Hub
+After [signing up](https://hub.docker.com/account/signup/) on the Docker Hub Website everyone is able to contribute docker images.
+
+First we login into our account by typing the `docker login` command on your machine.
+
+Before uploading an image, it should be correctly tagged with our name. It's convention on Docker Hub to tag images with `[USERNAME]/[PROJECT NAME]`. To achieve this, we use the `docker tag` command.
+
+      docker tag my-django-app mn033/my-django-app
+
+All that’s left to do is push up our image:
+
+        docker push mn033/my-django-app
+
+After pushing we will find the image on our [personal repo](https://registry.hub.docker.com/repos/) on the Docker Hub Website.
+
+Really easy, isn't it?
 
 ### Creating an image based on a plain image using a Dockerfile
 
@@ -27,38 +84,38 @@ Now, we demonstrate how to build an image based on a plain Linux by using a Dock
 
     # Set the base image to Ubuntu
     FROM ubuntu
-    
+
     # File Author / Maintainer
     MAINTAINER ComputerScienceAndMedia
-    
+
     # Update the sources list
     RUN apt-get update
-    
+
     # Install basic applications
     RUN apt-get install -y tar git curl nano wget dialog net-tools build-essential pkg-config
-    
+
     # Install Python3 and required dependencies
     RUN apt-get install -y python3 python3-dev python3-pip libfreetype6-dev
-    
+
     # Adding the application and requirements to the image
     ADD /app /test_application
     ADD /requirements.txt /test_application/requirements.txt
-    
+
     # Get pip to download and install requirements:
     RUN pip3 install -r /test_application/requirements.txt
-    
+
     # Expose ports
     EXPOSE 8000
-    
+
     # Set the default directory where CMD will execute
     WORKDIR /test_application
-    
+
     # Set the default command to execute when creating a new container
     # to change the port use: python3 manage.py runserver 0.0.0.0:1234
     CMD python3 manage.py runserver
 
 To generate an image based on this Dockerfile we execute the following command:
-    
+
     docker build -f OurDockerfile -t my-image-name .
 
 Please note that the command ends with a dot. This is the working directory which is used when the Dockerfile is processed. So, all paths in the Dockerfile will be based on this path. *Example*: If you set a path to `/` in the Dockerfile it will be the current working direcotry if `.` is specified in the build command.
@@ -73,10 +130,10 @@ Please note that the command ends with a dot. This is the working directory whic
 
 ##Troubleshooting
 1. Avoid spaces in your Jenkins project name.
-2. If you want to change the language in Jenkins simply change it in your browser. For Firefox use e.g. the add-on [Quick Locale Switcher](https://addons.mozilla.org/en-US/firefox/addon/quick-locale-switcher/). 
+2. If you want to change the language in Jenkins simply change it in your browser. For Firefox use e.g. the add-on [Quick Locale Switcher](https://addons.mozilla.org/en-US/firefox/addon/quick-locale-switcher/).
 3. If you want to start a docker container through a shell script, you need to be an administrator, however `sudo` will not work. So it is required to create a docker group if it does not already exist.
   * `sudo groupadd docker`
   * Add the connected user `${USER}` to the docker group. `sudo gpasswd -a ${USER} docker`
   * Restart the Docker daemon with `sudo service docker restart` (for Ubuntu 14.04 use `sudo service docker.io restart`)
-  * Restart your Jenkins server. 
+  * Restart your Jenkins server.
   * Or even the whole server
