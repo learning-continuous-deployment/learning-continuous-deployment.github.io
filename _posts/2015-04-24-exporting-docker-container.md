@@ -8,9 +8,12 @@ comments: true
 author_name: Marius
 excerpt_separator: <!--more-->
 ---
+
 In this post, we will explain how to export a Docker image, transfer it to a remote machine and running a Docker container based on it. This post is related to
 our project and the image which is created described in a previous post.
+
 <!--more-->
+
 # Exporting a Docker image
 
 Docker provides the possibility to save images to a *tar* archive. For that purpose the command `save` is provided. The following text snippet is an excerpt of Docker's documentation.
@@ -22,9 +25,9 @@ Docker provides the possibility to save images to a *tar* archive. For that purp
 If we assume that the image we want to export is named *myimage* the command would be one the following:
 
   	docker save -o exportedImage.tar myimage
-    	
+
 or
-    	
+
    	docker save myimage > exportedImage.tar
 
 By doing this, we stored the image in the `exportedImage.tar` archive. Now, we can transfer this to a remote machine.
