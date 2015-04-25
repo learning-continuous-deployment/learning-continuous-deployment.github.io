@@ -9,7 +9,7 @@ author_name: Steffi
 ---
 
 
-Hi there! This will be my very first blog post. Continue reading if you are unfamiliar with Docker or Jenkins. To get started we provide you with some general information about both tools regarding their installation and the continuous deployment process.
+Hi there! Continue reading if you are unfamiliar with Docker or Jenkins. To get started we provide you with some general information about both tools regarding their installation and the continuous deployment process.
 
 ## Docker
 
@@ -22,7 +22,7 @@ This virtualisation technique is based on the usage of Cgroups and Namespacing, 
 
 ### Dockerfiles
 
-Thus your application can be deployed as a Docker Container. Docker files are responsible for the configuration of these containers and allow you to create an automated build system. They are written in a Domain Specific Language (DSL) and contain instructions to set up a Docker image. 
+Thus your application can be deployed as a Docker Container. Docker files are responsible for the configuration of these containers and allow you to create an automated build system. They are written in a Domain Specific Language (DSL) and contain instructions to set up a Docker image. It is a text document that contains the responsible commands to build a Docker image and should be created at the root of your repository. The command `docker build` is run by the Docker daemon (not the CLI) and needs root privileges (how to create dockergroups will be explained in a later [post](http://learning-continuous-deployment.github.io/jenkins/container/dockerfile/2015/04/24/creating-the-first-container/)). 
 
 ### DockerHub
 
