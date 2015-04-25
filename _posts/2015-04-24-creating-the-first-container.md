@@ -24,11 +24,11 @@ As a result Docker Hub lists all the images that might have something to do with
 
 ![Docker Hub search results]({{site.url}}/assets/images/docker_hub/searchresults.png)
 
-We are going to use the official Django image. By clicking on the repo we can view installation guidelines and other information. In this case, there are several images available i.e. with different Python versions preinstalled.
+We are going to use the official Django image. By clicking on the repo we can view installation guidelines and other information. In this case, there are several images available i.e. with different Python versions preinstalled:
 
 ![Docker Hub Django repo]({{site.url}}/assets/images/docker_hub/django_repo.png)
 
-As our Django app is written in Python_v2 we choose the image *django:python2-onbuild*. ONBUILD is a docker technique to run additional triggers after the image has been setup in a container. We can view these triggers by inspecting the image (look for the *OnBuild* section).
+As our Django app is written in Python_v2 we choose the image `django:python2-onbuild`. ONBUILD is a docker technique to run additional triggers after the image has been setup in a container. We can view these triggers by inspecting the image (look for the *OnBuild* section).
 
     docker inspect django:python2-onbuild
 
@@ -59,7 +59,7 @@ We can then build and run the Docker image. (Make sure that you run the build co
     docker build -t my-django-app .
     docker run --name some-django-app -p 8000:8000 -d my-django-app
 
-Now we will test our app by visiting http://localhost:8000 in a browser.
+Now we could test our app by visiting `http://localhost:8000` in a browser as it will automatically serve the web application.
 
 ### Contributing to Docker Hub
 After [signing up](https://hub.docker.com/account/signup/) on the Docker Hub Website everyone is able to contribute docker images.
