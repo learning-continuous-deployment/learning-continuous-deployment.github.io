@@ -72,7 +72,7 @@ Before uploading an image, it should be correctly tagged with our name. It's con
 
 All that’s left to do is push up our image:
 
-        docker push mn033/my-django-app
+      docker push mn033/my-django-app
 
 After pushing we will find the image on our [personal repo](https://registry.hub.docker.com/repos/) on the Docker Hub Website.
 
