@@ -6,12 +6,12 @@ categories: docker images dockerfile
 banner_image: export-docker.png
 comments: true
 author_name: Marius
-excerpt: In this post, we will explain how to export a Docker image, transfer it to a remote machine and running a Docker container based on it. This post is related to our project and the image which is created described in a previous post.
 ---
 
 In this post, we will explain how to export a Docker image, transfer it to a remote machine and running a Docker container based on it. This post is related to
 our project and the image which is created described in a previous post.
 
+ <!--more-->
 
 # Exporting a Docker image
 

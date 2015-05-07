@@ -10,6 +10,9 @@ url: "http://learning-continuous-deployment.github.io" # the base hostname & pro
 logourl: # /assets/images/logo.png # Site logo
 author: 
 author_thumbnail: /assets/images/hdm-logo.png # Author avatar
+
+excerpt_separator: <!--more-->
+
 # Theme customization - please change from the defaults!
 theme:
   # Color for sidebar bar, links, etc
