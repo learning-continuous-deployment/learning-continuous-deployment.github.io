@@ -30,9 +30,9 @@ We are going to use the official Django image. By clicking on the repo we can vi
 
 ![Docker Hub Django repo]({{site.url}}/assets/images/docker_hub/django_repo.png)
 
-As our Django app is written in Python_v2 we choose the image `django:python2-onbuild`. ONBUILD is a docker technique to run additional triggers after the image has been setup in a container. We can view these triggers by inspecting the image (look for the *OnBuild* section).
+As our Django app is written in Python version 3 we choose the image `django:python3-onbuild`. ONBUILD is a docker technique to run additional triggers after the image has been setup in a container. We can view these triggers by inspecting the image (look for the *OnBuild* section).
 
-    docker inspect django:python2-onbuild
+    docker inspect django:python3-onbuild
 
 In our case:
 
@@ -52,9 +52,15 @@ This means that a `requirements.txt` is needed inside of our projects root folde
     pylatex
     click
 
-Finally we write our `Dockerfile` and place it in the root folder as well, it will only contain one line:
+Finally we write our `Dockerfile` and place it in the root folder as well:
 
-    FROM django:python2-onbuild
+    FROM django:python3-onbuild
+
+    RUN apt-get update
+
+    RUN apt-get install -y texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+
+In Order to install additional LaTeX dependencies we added two `RUN` commands which will make sure to pull and install everything we need for our setup. Those `RUN` commands and the contents of `requirements.txt` are optional and depend on the kind of project and its dependencies. 
 
 We can then build and run the Docker image. (Make sure that you run the build command inside of the projects root folder):
 
