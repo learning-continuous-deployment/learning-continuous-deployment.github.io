@@ -9,6 +9,8 @@ author_name: Jan and Marius
 ---
 Hello to our second blog post. This time we will cover how to set up a [Jenkins](https://jenkins-ci.org) job which builds a project of a [GitHub](https://github.com) repository. Additionally, the build process is automatically started when a contributor pushs to the respective GitHub repository.
 
+ <!--more-->
+
 Note: We assume that you have properly installed properly Jenkins including the [GitHub plugin](https://wiki.jenkins-ci.org/display/JENKINS/GitHub+Plugin).
 
 ## Creating a Jenkins job

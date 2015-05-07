@@ -10,6 +10,8 @@ author_name: Steffi, Marius, Markus
 
 This post will explain how you can setup a Jenkins job that will build a Docker image which is defined by a dockerfile. Later, it will be deployed onto a remote server, so our application will be running in an own container on its own machine.
 
+ <!--more-->
+
 # Our Project and the Dockerfile
 In this section, we demonstrate two different approaches to build a docker container. The first one makes use of the [Docker Hub](https://hub.docker.com). Docker Hub is a platform where you can store and publish predefined docker images. Those images can be downloaded by other users and executed or used as fundament for future images, respectively. The other approach is to create a Dockerfile where an image will be created based on a plain Linux image like Ubuntu. A Dockerfile is a file consisting of a sequence of various Docker commands which describe the process of building an specific image.
 

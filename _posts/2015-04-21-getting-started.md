@@ -11,6 +11,8 @@ author_name: Steffi
 
 Hi there! Continue reading if you are unfamiliar with Docker or Jenkins. To get started we provide you with some general information about both tools regarding their installation and the continuous deployment process.
 
+ <!--more-->
+
 ## Docker
 
 In general Docker provides a container based solution for virtualisation. A container isolates a process so it seems to run on a standalone OS, although it still runs on the same OS as its host and therefore shares the same kernel. You could use it to develop, ship and run applications. Furthermore you can integrate Docker into a continuous deployment workflow. It also helps to set up a testing environment so you can run multiple apps on several operating systems - on the same server. 
