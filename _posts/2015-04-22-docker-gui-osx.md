@@ -44,6 +44,9 @@ Expose local xquartz socket via socat on a TCP port
 
 Now all you have to do is pass the display to the Container:  
 ```% in another window```   
-```docker run -it -e DISPLAY=192.168.59.3:0 batmat/docker-eclipse```
-Note: the IP saved in `DISPLAY` is the one of your virtual box host. 
+```docker run -it -e DISPLAY=192.168.59.3:0 batmat/docker-eclipse```  
+
 ![Docker container running Eclipse Luna]({{site.url}}/assets/images/docker_eclipse_osx.png)
+
+Note: the IP saved in `DISPLAY` is the one of your virtual box host. 
+
