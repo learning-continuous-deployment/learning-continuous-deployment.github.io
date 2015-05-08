@@ -7,8 +7,6 @@ banner_image: docker_on_osx_banner.jpg
 comments: true
 author_name: Jan
 ---
-
-
 ##How to install Docker on OS X
 ###Step by step instruction
 `brew install caskroom/cask/cask-brew`  
