@@ -8,7 +8,9 @@ comments: true
 author_name: Jan
 ---
 ##How to install Docker on OS X
-###Step by step instruction 
+
+###Step by step instruction
+
 On OS X there is the convenient possibility to install all necessary tools via Homebrew:
     
     brew install caskroom/cask/cask-brew
