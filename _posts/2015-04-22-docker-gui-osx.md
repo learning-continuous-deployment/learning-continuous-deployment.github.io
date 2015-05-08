@@ -7,10 +7,11 @@ banner_image: docker_on_osx_banner.jpg
 comments: true
 author_name: Jan
 ---
-##How to install Docker on OS X
+
 This post will explain how to use -e DISPLAY flag on Mac OS X, so that you can get a GUI to your container. Furthermore it covers the basic steps of installing the boot2Docker VM, that runs the Docker engine, on OS X.
 <!--more-->   
 
+##How to install Docker on OS X
 ###Step by step instruction
 
 On OS X there is the convenient possibility to install all necessary tools via Homebrew:
