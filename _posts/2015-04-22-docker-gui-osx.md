@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How get a GUI to a Docker container on OS X"
+title: "How to get a GUI to a Docker container on OS X"
 date: 2015-04-22 09:59:00
 categories: docker images dockerfile
 banner_image: docker_on_osx_banner.jpg
