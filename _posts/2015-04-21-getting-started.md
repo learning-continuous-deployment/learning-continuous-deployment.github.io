@@ -40,6 +40,7 @@ For future reference Docker will be installed on our server *continuousdeploymen
 ### Possible Errors 
 
 Errors that occured in our setup: 
+
 * Make sure the environment variable of GitHub's ssh.exe is set correctly otherwise add it to your path `set PATH=%PATH%;C:\Program Files (x86)\Git\bin` 
 * Installing Docker on a VM with Ubuntu 14.04 requires a Kernel Version > 3.10 
 
