@@ -24,10 +24,10 @@ Docker containers are started with a very restricted set of capabilities, so eve
 
 ##Best practices 
 As a conclusion one could say that Docker containers are quite secure by default. Nevertheless you should be aware of possible threats or attacks and therefore ensure that your system is protected. Here are some best practices for your use with Docker containers. Nevertheless if you are interested in further reading, check out the [Docker website](https://docs.docker.com/articles/security/) or their [Blog](http://blog.docker.com/2013/08/containers-docker-how-secure-are-they/).
-* run docker daemon in a dedicated server
-* take care of running processes as non-privileged. 
-* only trusted users should be allowed to control your Docker daemon
-* if running Docker on a server move all other services within containers controlled by Docker 
+- run docker daemon in a dedicated server
+- take care of running processes as non-privileged
+- only trusted users should be allowed to control your Docker daemon
+- if running Docker on a server move all other services within containers controlled by Docker 
 
 
 
