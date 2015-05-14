@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Configuring Jenkins"
-date:   2015-05-09 17:18:00
+date:   2015-05-14 17:18:00
 categories: docker jenkins
-banner_image: docker_security.jpg
+banner_image: configuring_jenkins.png
 comments: true
 author_name: Markus
 excerpt_separator: <!--more-->
