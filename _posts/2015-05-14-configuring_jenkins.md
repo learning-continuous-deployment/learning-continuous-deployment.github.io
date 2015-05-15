@@ -50,6 +50,6 @@ The scripts just contain a single standard command.
 
       docker stop $(docker ps -a -q)
 
-`deleteAllImages`: We need the forced delete flag `-f` to clear images regardless of connected containers. They will be cleared as well.
+`deleteAllImages`: We need the forced delete flag `-f` to clear images regardless of connected containers. They will be cleared as well. This command is implemented to save disk space on the server - one of our images uses about 2.4 GB!
 
       docker rmi -f $(docker images -q)
