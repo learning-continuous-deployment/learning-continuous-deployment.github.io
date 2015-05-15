@@ -38,11 +38,18 @@ Then we transfer this tarball to the other server via scp
 Next, we ssh to the second server - this will provide us with a bash to execute commands directly on the second server.
 We have to `load` the image from the tarball, then we run a little script to stop all currently running containers and finally run the newly loaded container and expose it to the public.
 
-      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "docker load < /home/docker/django-app-image.tar"
       ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "/root/stopContainer.sh"
+      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "/root/deleteAllImages.sh"
+      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "docker load < /home/docker/django-app-image.tar"
       ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "docker run -d -p 80:1234 csm_$BUILD_ID python3 manage.py runserver 0.0.0.0:1234"
 
-You may have noticed that we use a script to stop containers, strangely it did not work directly via ssh commands. We will come back to this on a later stage why this happened.
-The script just contains a single standard command:
+You may have noticed that we use scripts to stop containers and remove images, strangely it did not work directly via ssh commands. We will come back to this on a later stage why this happened.
+The scripts just contain a single standard command.
+
+`stopContainer`:
 
       docker stop $(docker ps -a -q)
+
+`deleteAllImages`: 
+
+      docker rmi -f $(docker images -q)
