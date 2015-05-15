@@ -23,13 +23,7 @@ Now you have a window to write shell commands.
 
 Our shell commands look like this at the moment, we will go through the commands shortly:
 
-      docker build -f "$WORKSPACE/Dockerfile" -t "csm_$BUILD_ID" $WORKSPACE
-      docker save -o django-app-image.tar "csm_$BUILD_ID"
-      scp django-app-image.tar root@continuousdeployment-2.mi.hdm-stuttgart.de:/home/docker
-      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "docker load < /home/docker/django-app-image.tar"
-      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "/root/stopContainer.sh"
-      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "docker run -d -p 80:1234 csm_$BUILD_ID python3 manage.py runserver 0.0.0.0:1234"
-
+![Shell commands]({{site.url}}/assets/images/shell_commands.png)
 
 ##Explaining the commands
 The first two commands build a new docker image and save it to a .tar file to prepare it for sending to the other server.
