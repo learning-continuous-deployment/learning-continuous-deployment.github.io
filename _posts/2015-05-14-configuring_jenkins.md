@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Configuring Jenkins"
+title:  "Jenkins shell commands"
 date:   2015-05-14 17:18:00
 categories: docker jenkins
 banner_image: configuring_jenkins.png

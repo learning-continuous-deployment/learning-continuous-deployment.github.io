@@ -1,14 +1,14 @@
 # Site settings
 title: Learning Continuous Deployment
 tagline: Continuous Deployment, Docker, Git
-email: 
+email:
 description: > # this means to ignore newlines until "baseurl:"
   Hi, we are a handful of students
   and wanna have some fun with continuous deployment. :-)
 baseurl: # the subpath of your site, e.g. /blog/
 url: "http://learning-continuous-deployment.github.io" # the base hostname & protocol for your site
 logourl: # /assets/images/logo.png # Site logo
-author: 
+author:
 author_thumbnail: /assets/images/hdm-logo.png # Author avatar
 
 excerpt_separator: <!--more-->
@@ -18,12 +18,12 @@ theme:
   # Color for sidebar bar, links, etc
   highlight_color: "#205081" #205081" # "#272935"
   # Social media links, leave blank to ignore
-  social: 
+  social:
     github: learning-continuous-deployment
-    twitter: 
-    facebook: 
-    gplus: 
-    pinterest: 
+    twitter:
+    facebook:
+    gplus:
+    pinterest:
 
   # Enable share buttons on post footer
   show_share_buttons: true
@@ -35,8 +35,8 @@ theme:
   disqus_shortname: learningcontinuousdeployment
 
   # Google Analytics/Webmaster key, leave blank to ignore
-  google_analytics_key: 
-  google_webmaster_key: 
+  google_analytics_key:
+  google_webmaster_key:
 
 # Build settings
 markdown: kramdown
@@ -45,10 +45,10 @@ markdown: kramdown
 permalink:        pretty
 
 # Pagination config
-paginate: 5
+paginate: 15
 
 # Files/Folders to be excluded from generated _site folder
-exclude: 
+exclude:
   - CNAME
   - Gemfile
   - Rakefile
