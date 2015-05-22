@@ -7,7 +7,7 @@ banner_image: data_docker.jpg
 comments: true
 author_name: Jan
 ---
-In this blog post we are going to have a look at working with data inside and outside of containers. After reading you will have a basic understanding Docker volumes and you will know how to achieve persistent data stores. 
+In this blog post we are going to have a look at working with data storage in and outside of containers. After reading you will have a basic understanding of Docker volumes and you will know how to achieve persistent data storage. 
 <!--more-->
 
 ###Introduction 
