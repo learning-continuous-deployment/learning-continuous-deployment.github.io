@@ -25,7 +25,9 @@ There are two distinct use cases for the work with volumes.
 So let's have a look at the first use case:
 We mount a directory (or file) from the host to the container by setting the `-v` flag to the path on the host system. The path after the `:` specifies, where the data will be mounted inside the container. This is important, if you don't put the `:` then a new volume will be created, which is empty. So typing 
 
+```Shell
 docker run -it /host/dir_a:/home/dir_b ubuntu /bin/bash
+```
 
 will give you a shell to a Ubuntu based container, where the host directory `/host/dir_a` will be mounted in the container at `/home/dir_b`.
 
@@ -34,7 +36,9 @@ Sometimes this can be pretty handy, __but__ mounting a host directory is of cour
 ###Adding a volume to your container
 As mentioned above, we can create a new volume in the container, which can then be imported into another container. Let's start simple and create a new volume: 
 
+```Shell
 docker run -v /data ubuntu
+```
 
 This will create a new volume inside the container at `/data`. Be aware, that you can mount multiple volumes. You can achieve the same result by using the `VOLUME` keyword in Dockerfile. Such volumes on it's own can't solve the *persistence problem*, but lead to the idea of [data-only containers](http://container42.com/2013/12/16/persistent-volumes-with-docker-container-as-volume-pattern/). 
 
@@ -42,17 +46,24 @@ This will create a new volume inside the container at `/data`. Be aware, that yo
 The most elegant way to share data between containers is the concept of the so-called *data volume containers*, which are simple containers running on a barebone image and doing basically nothing, but exposing a volume. This approach perfectly regards the single responsibility principle and is said to work best for production. 
 So let's is a super simple data-only container:     
 
+```Shell
 docker create -v /datastore --name datacontainer ubuntu
+```
 
 To access the volume from another container, we use the `--volume-from` flag and pass the container's ID or name. A simple example could look like this:
 
+```Shell
 docker run -it --volumes-from datacontainer ubuntu /bin/bash
 root@efffe6d65a2f: cd /datacontainer/; touch hello_persistent_world
+```
+
 This will write a file to the `/datastore`-volume of `datacontainer`. To double check that, attach the data-only container to a third one:
 
+```Shell
 docker run -it --volumes-from datacontainer ubuntu /bin/bash
 root@5850de88cb17: cd /datastore/; ls
 hello_persistent_world
+```
 
 Another fact you should have noticed is, that the data-only containers don't need to be running, they just have to exist. To remove the volume and delete the data, you have to explicitly call `docker rm -v` on the last container, which references the volume. 
 
