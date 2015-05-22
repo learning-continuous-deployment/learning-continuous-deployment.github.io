@@ -2,8 +2,8 @@
 layout: post
 title: "Persistent Data Storage with Docker"
 date: 2015-05-22 09:59:00
-categories: docker images dockerfile
-banner_image: docker_on_osx_banner.jpg
+categories: docker container volumes
+banner_image: data_docker.jog
 comments: true
 author_name: Jan
 ---
