@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Jenkins shell commands"
-date:   2015-05-14 17:18:00
+title:  "Jenkins shell commands [Update]"
+date:   2015-05-24 17:18:00
 categories: docker jenkins
 banner_image: configuring_jenkins.png
 comments: true
@@ -45,6 +45,10 @@ We have to `load` the image from the tarball, then we run a little script to sto
 
 You may have noticed that we use scripts to stop containers and remove images, strangely it did not work directly via ssh commands. We will come back to this on a later stage why this happened.
 The scripts just contain a single standard command.
+
+**[UPDATE 24.05.2015]**
+The problem with commmands that contain stacked calls like `$(...)` is actually that these commands will be executed on the current machine - which in our case is wrong because we ssh to our second server.
+Another solution would be to include ssh after the `$`, but this would clutter the commands too much and make them error prone against typos.
 
 `stopContainer`:
 
