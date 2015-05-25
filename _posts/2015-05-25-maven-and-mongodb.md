@@ -2,7 +2,7 @@
 layout: post
 title:  "Maven and MongoDB: a short introduction"
 date:   2015-05-25 13:15
-categories: docker jenkins git
+categories: maven mongodb
 banner_image: maven_mongodb.png
 comments: true
 author_name: Steffi
