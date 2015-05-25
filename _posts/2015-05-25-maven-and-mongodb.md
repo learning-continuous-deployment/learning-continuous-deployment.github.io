@@ -14,7 +14,17 @@ Hello! This post provides a short introduction in Maven and MongoDB and are for 
 
 ##Maven
 
-[Apache Maven](https://maven.apache.org/index.html) can be understood as a project management tool with best practices for your projects, so that several projects work in the same way and share the same characteristics. Therefore it applies patterns to the project's build infracstructure like e.g. visibility, reusability, maintainability and comprehensibility. These patterns can be used for managing Builds, Documentation, Reporting, Releases and for many more tasks. Maven's standard conventions help to accelearte the project's development process. The most important file of a Maven project is `pom.xml` which contains all relevant information of your project. A good starting guide for Maven can be found [here](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html). 
+[Apache Maven](https://maven.apache.org/index.html) can be understood as a project management tool with best practices for your projects, so that several projects work in the same way and share the same characteristics. Therefore it applies patterns to the project's build infracstructure like e.g. visibility, reusability, maintainability and comprehensibility. These patterns can be used for managing Builds, Documentation, Reporting, Releases and for many more tasks. Maven's standard conventions help to accelearte the project's development process. The most important file of a Maven project is `pom.xml` (pom stands for Project Object Model) which contains all relevant information of your project. A good starting guide for Maven can be found [here](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html). 
+
+Your Dockerfile should be located in the POM-file's directory (root of your project). Use the Maven image: 
+
+    FROM maven:3.2-jdk-7-onbuild
+    CMD ["do something"]
+
+The build will copy `. /usr/src/app`and run `mvn install` so you can build and run the image with: 
+
+    docker buil -t maven
+    docker run -it --name maven-script maven
 
 ###Installation 
 
