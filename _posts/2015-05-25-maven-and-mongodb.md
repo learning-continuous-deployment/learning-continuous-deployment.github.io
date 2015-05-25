@@ -57,7 +57,30 @@ MongoDB is a document database in which each record is a document that is simila
     }
 
 Futhermore MongoDB provides high performance, e.g. with faster queries through indexes. Its replication facility provides automatic failovers and data redundancy and the horizontal scalability allows automatic sharding across a cluster of machines. 
- 
+
+Based on the latest version of Ubuntu from the [Docker Hub Repository](https://registry.hub.docker.com/_/ubuntu/) you can import the MongoDB public GPG key, create a MongoDB repository file, whereupon you can update your packages and install MongoDB: 
+
+    # Format: FROM    repository[:version]
+    FROM ubuntu:latest
+    # Installation: Import MongoDB public GPG key AND create a MongoDB list file
+    RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv 7F0CEB10
+    RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | tee /etc/apt/sources.list.d/10gen.list
+    # Update apt-get sources AND install MongoDB
+    RUN apt-get update && apt-get install -y mongodb-org
+
+Because MongoDB requires a data directory you need to create that with:
+
+    # Create the MongoDB data directory
+    RUN mkdir -p /data/db
+To run `mongod` inside the containers lauchned from the MongoDB image you need to set an `ENTRYPOINT` and ports:
+
+    # Expose port 27017 from the container to the host
+    EXPOSE 27017
+    # Set usr/bin/mongod as the dockerized entry-point application
+    ENTRYPOINT usr/bin/mongod
+
+Now you can save the file and build your image. 
+
 
 ##Installation
 
