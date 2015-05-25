@@ -8,7 +8,7 @@ comments: true
 author_name: Steffi
 ---
 
-Hello! This post is for those who are unfamiliar with Maven and MongoDB and provides a quick introduction in those tools. We will use both tools for our new sample project to show how to work with persistant data in Docker.
+Hello! This post provides a short introduction in Maven and MongoDB and are for is for those who are unfamiliar with these tools. We will use both tools for our new sample project to show how to work with persistant data in Docker.
 
 <!--more-->
 
