@@ -21,10 +21,15 @@ Your Dockerfile should be located in the POM-file's directory (root of your proj
     FROM maven:3.2-jdk-7-onbuild
     CMD ["do something"]
 
-The build will copy `. /usr/src/app`and run `mvn install` so you can build and run the image with: 
+The build will copy `. /usr/src/app` and `RUN mvn install` so you can build and run the image with: 
 
     docker build -t maven .
     docker run -it --name maven-script maven
+	
+If a complete Dockerfile is inconvenient for your project you can run the maven Docker image directly:
+
+    docker run -it --rm --name maven-project -v "$PWD":/usr/src/maven-project -w /usr/src/maven-project maven:3.2-jdk-7 mvn clean install
+
 
 ###Installation 
 
