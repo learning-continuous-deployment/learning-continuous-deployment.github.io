@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Jenkins shell commands"
-date:   2015-05-14 17:18:00
+title:  "Jenkins shell commands [Update]"
+date:   2015-05-24 17:18:00
 categories: docker jenkins
 banner_image: configuring_jenkins.png
 comments: true
@@ -39,17 +39,22 @@ Next, we ssh to the second server - this will provide us with a bash to execute 
 We have to `load` the image from the tarball, then we run a little script to stop all currently running containers and finally run the newly loaded container and expose it to the public.
 
       ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "/root/stopContainer.sh"
-      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "/root/deleteAllImages.sh"
+      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "/root/deleteAllImages.sh" || true
       ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "docker load < /home/docker/django-app-image.tar"
-      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "docker run -d -p 80:1234 csm_$BUILD_ID python3 manage.py runserver 0.0.0.0:1234"
+      ssh root@continuousdeployment-2.mi.hdm-stuttgart.de "docker run -d -p 80:1234 -name csm_$BUILD_ID csm_$BUILD_ID python3 manage.py runserver 0.0.0.0:1234"
 
 You may have noticed that we use scripts to stop containers and remove images, strangely it did not work directly via ssh commands. We will come back to this on a later stage why this happened.
 The scripts just contain a single standard command.
 
-`stopContainer`:
+**[UPDATE 24.05.2015]**
+The problem with commmands that contain stacked calls like `$(...)` is actually that these commands will be executed on the current machine - which in our case is wrong because we ssh to our second server.
+Another solution would be to include ssh after the `$`, but this would clutter the commands too much and make them error prone against typos.
 
-      docker stop $(docker ps -a -q)
+`stopContainer`: With the `--filter=""` tag we can filter our containers by name. This is the name we previously assigned to the image in the run command with `-name`. This way we can make sure not to stop images from our other projects for example.
 
-`deleteAllImages`: We need the forced delete flag `-f` to clear images regardless of connected containers. They will be cleared as well. This command is implemented to save disk space on the server - one of our images uses about 2.4 GB!
+      docker stop $(docker ps -a --filter="name=csm" -q)
 
-      docker rmi -f $(docker images -q)
+`deleteAllImages`: This command is implemented to save disk space on the server by deleting unused images and containers - one of our images uses about 2.4 GB! The shell command is followed by `|| true` because we do not want any console output to fail our jenkins build. For example if there are no images to clean, this command will return a message we so not want to receive at this point. We can still see those messages in the Jenkins output console tough.
+
+      docker rm $(docker ps --no-trunc -aq)
+      docker rmi $(docker images -q --filter "dangling=true")
