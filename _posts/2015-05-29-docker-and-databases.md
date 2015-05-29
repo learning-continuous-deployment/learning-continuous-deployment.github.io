@@ -7,11 +7,11 @@ banner_image: docker_database.jpg
 comments: true
 author_name: Jan
 ---
-So lately you read about volumes, sharing data and achieving persistence when working with ephemeral Docker containers. In the following blogpost we use this knowledge to build a dockerized web application. You will learn, how to compose the single tiers and what is a good way to link the single containers together.
+So lately you read about volumes, sharing data and achieving persistence when working with ephemeral Docker containers. In the following blogpost we use this knowledge to build a dockerized web application. You will learn, how to compose the single tiers and how to to link the single containers together.
 <!--more-->
 
 ##Introduction 
-The task is to *containerize* a web application using Docker and achieving persistence with ephemeral containers. For this purpos we created a sample project to illustrate that, the pitfalls and the solution.  The source code can be found [on Github](https://github.com/learning-continuous-deployment/java-mongodb-sample). You will recognize, that the sample is super basic, because we wanted to minimize distractions. It uses Java for the business logic and the connection to a MongoDB, which functions as datastore.
+The task is to *containerize* a web application using Docker and achieve persistence with ephemeral containers. For this purpose we created a sample project to illustrate that, the pitfalls and the solution.  The source code can be found [on Github](https://github.com/learning-continuous-deployment/java-mongodb-sample). You will recognize, that the sample is super basic, because we wanted to minimize distractions. It uses Java for the business logic and the connection to a MongoDB, which functions as datastore.
 All descriptions, path names and so on refer to the used technologies, but we tried to keep it as unspecific as possible.
 
 ##Solution Idea
