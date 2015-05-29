@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Docker and Databases - a Hands-on Guide"
-date: 2015-05-22 09:59:00
-categories: docker images dockerfile databases 
+date: 2015-05-22 13:02:00
+categories: docker images dockerfile 
 banner_image: docker-database.jpg
 comments: true
 author_name: Jan
