@@ -2,7 +2,7 @@
 layout: post
 title: "Docker and Databases - a Hands-on Guide"
 date: 2015-05-29 13:02:00
-categories: docker images dockerfile database persistence linkinng container 
+categories: docker images dockerfile database persistence volumes linking container 
 banner_image: docker_database.jpg
 comments: true
 author_name: Jan
