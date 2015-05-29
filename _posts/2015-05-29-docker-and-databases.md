@@ -7,24 +7,24 @@ banner_image: docker_database.jpg
 comments: true
 author_name: Jan
 ---
-So lately you read about volumes, sharing data and achieving persistence when working with ephemeral Docker containers. In the following blogpost we use this knowledge to build a dockerized web application. You will learn, how to compose the single tiers and how to to link the single containers together.
+So lately you read about volumes, sharing data and achieving persistence when working with ephemeral Docker containers. In the following blogpost we use this knowledge to build a dockerized web application. You will learn how to compose the single tiers and how to to link the single containers together.
 <!--more-->
 
 ##Introduction 
-The task is to *containerize* a web application using Docker and achieve persistence with ephemeral containers. For this purpose we created a sample project to illustrate that, the pitfalls and the solution.  The source code can be found [on Github](https://github.com/learning-continuous-deployment/java-mongodb-sample). You will recognize, that the sample is super basic, because we wanted to minimize distractions. It uses Java for the business logic and the connection to a MongoDB, which functions as datastore.
+The task is to *containerize* a web application using Docker and achieve persistence with ephemeral containers. For this purpose we created a sample project to illustrate that, the pitfalls and the solution. The source code can be found [on Github](https://github.com/learning-continuous-deployment/java-mongodb-sample). You will recognize, that the sample is super basic, because we wanted to minimize distractions. It uses Java for the business logic and the connection to a MongoDB, which functions as datastore.
 All descriptions, path names and so on refer to the used technologies, but we tried to keep it as unspecific as possible.
 
 ##Solution Idea
-As already mentioned in the blogpost about volumes it is considered to be *best practice* to use a data-only container to store our database entries. So it would be enough to havetwo conntainers - one with the data and another one running the DBMS and the actual application (an example for this setup can be found [here](https://github.com/jbfink/docker-wordpress)). But for our use case this is not enough, because we want the maxumum flexiblity and therefore consider, that *multiple applications* should be able to access the database. This leads to the following division in containers: 
+As already mentioned in the blogpost about volumes it is considered to be *best practice* to use a data-only container to store our database entries. So it would be enough to have two containers - one with the data and another one running the DBMS and the actual application (an example for this setup can be found [here](https://github.com/jbfink/docker-wordpress)). But for our use case this is not enough, because we want the maximum flexibility and therefore consider, that *multiple applications* should be able to access the database. This leads to the following division in containers: 
 1. __Data-only container__, which  references the volume [/data/db](http://docs.mongodb.org/manual/tutorial/manage-mongodb-processes/) (the default directory for storing data)
 2. __DB-Container__ running [mongod](http://docs.mongodb.org/manual/reference/program/mongod/), (the primary deamon process of MongoDB)
 3. __Application container__ running the business logic
 
-This enables a separation of duties in a neat way and improves portability, reuseability, mantainbility and so on. 
-At the same time this divison in separate containers brings up another problem. The containers have to be enabled to *communicate* with eachother. But we will deal with that later.
+This enables a separation of duties in a neat way and improves portability, reusability, maintainability and so on. 
+At the same time this division in separate containers brings up another problem. The containers have to be enabled to *communicate* with each other. But we will deal with that later.
 
 ###A detailed look on the containers
-Before we can deal with the linkage and deployment of the containers, we need to understand them and therefore have a detailed look on the [images](https://docs.docker.com/userguide/dockerimages/) - they are based on.
+Before we can deal with the linkage and deployment of the containers, we need to understand them and therefore have a detailed look on the [images](https://docs.docker.com/userguide/dockerimages/) they are based on.
 
 For the data-only container we don't have to use a Dockerfile. It functions as a plain datastore and therefore it is enough to use a base image (e.g. 'ubuntu') and create the volume via the `-v` - flag. 
     
@@ -48,7 +48,7 @@ These other containers are a bit more complex. Thus their images are build from 
     # Set the mongod daemon as entry-point application
     ENTRYPOINT /usr/bin/mongod
 
-So nothing special here. The latest Ubuntu image serves as base and then the MongoDB is installed. The two most import thinks to recognize are, that `mongod` is started when running the container and that the [27017](http://docs.mongodb.org/manual/reference/default-mongodb-port/) port is exposed, which is the default port for mongod instances. One has to notice, that it is necessary to run the resulting image with the `--volumes-from` - flag to the data-only container to have access to the volume containing `/data/db`: 
+So nothing special here. The latest Ubuntu image serves as base and then the MongoDB is installed. The two most import things to recognize are that `mongod` is started when running the container and that the [27017](http://docs.mongodb.org/manual/reference/default-mongodb-port/) port is exposed, which is the default port for mongod instances. One has to notice, that it is necessary to run the resulting image with the `--volumes-from` - flag to the data-only container to have access to the volume containing `/data/db`: 
     
     docker run -d -p :27017 --volumes-from data_container --name mongodb mongodb_$BUILD_ID
     
@@ -60,13 +60,13 @@ The last Dockerfile to examine is the one of the actual application:
     EXPOSE 8080
     ENTRYPOINT ["java", "-jar", "/home/code/JavaMongoDbApp-0.0.1-SNAPSHOT-jar-with-dependencies.jar"]
 
-This time we use the Dockerhub to pull an image, where the OpenJDK Java 8 Runtime Environment is already installed. Then we copy the .jar-file with all its dependcies to the `/home/code`directory in the container, expose port number 8080, on which the HTTP server of the application runs and finally set the entrypoint to run the .jar-file.  
+This time we use the Dockerhub to pull an image, where the OpenJDK Java 8 Runtime Environment is already installed. Then we copy the .jar-file with all its dependencies to the `/home/code`directory in the container, expose port number 8080, on which the HTTP server of the application runs and finally set the entry point to run the .jar-file.  
 
 So far so good, but when someone tries to run this application container he will get an `com.mongodb.MongoSocketOpenException: Exception opening socket`, because the application tries to access port 27017 on the localhost, where he expects the `mongod` by default.  
 So it is still crucial to introduce one container to the other and enable them to *communicate*.  
 
 ###Solutions for linking
-This procedure is called __linking__ and not as hard as you might expect. Actually there are two possible ways to achieve dataflow between two or more containers.
+This procedure is called __linking__ and is not as hard as you might expect. Actually there are two possible ways to achieve dataflow between two or more containers.
 1. Use exposed IP ports and connect via them. 
 2. Use `--link` - flag in recent docker versions.  
 
@@ -74,13 +74,13 @@ The second option also uses exposed ports, port forwarding and such things, but 
 
 ####Linking via `--link`
 As already mentioned this is the cleanest way of achieving the connection of two services. 
-By specifying the `--link` - flag in the `run`-command Docker sets up environmental variables for the exposed ports. This allows the second container to dynamically adjust its networking settings without explicit port forwarding or fiddling around with IPs. By specifying `--link`with the parameters `<name of running container>:<alias`> we establish such a link. 
+By specifying the `--link` - flag in the `run`-command Docker sets up environmental variables for the exposed ports. This allows the second container to dynamically adjust its networking settings without explicit port forwarding or fiddling around with IPs. By specifying `--link` with the parameters `<name of running container>:<alias`> we establish such a link. 
 
     docker run -d -p 80:8080 --link mongodb:mongo --name app app_$BUILD_ID
     
-This command runs the `app_$BUILD_ID` image and links the running container `mongodb` as `mongo`. This causes Docker to create a bunch of the already mentioned environmental variables. These variables are named in a certain way. The specified alias - in our case `mongo` - serves as prefix in capitals followed by an underscore. (For more information [see the Docker documentation in the section *Environment Variables*](https://docs.docker.com/userguide/dockerlinks/))  
+This command runs the `app_$BUILD_ID` image and links the running container `mongodb` as `mongo`. This causes Docker to create a bunch of the already mentioned environment variables. These variables are named in a certain way. The specified alias - in our case `mongo` - serves as prefix in capitals followed by an underscore. (For more information [see the Docker documentation in the section *Environment Variables*](https://docs.docker.com/userguide/dockerlinks/))  
 
-For the connection to the database only one environmental variable is of interest. `<ALIAS>_PORT` specifies the IP address of the second/linked container and the exposed port. This is enough to connect the Java application to the `mongod` daemon and therefore manipulate the database. This is done by reading that environment variable in the Java code and setting the MongoClient to the specified IP and port. In Java code this can look like this: 
+For the connection to the database only one environment variable is of interest. `<ALIAS>_PORT` specifies the IP address of the second/linked container and the exposed port. This is enough to connect the Java application to the `mongod` daemon and therefore manipulate the database. This is done by reading that environment variable in the Java code and setting the MongoClient to the specified IP and port. In Java code this can look like this: 
     
     //Specifies the name of environmental variable set by Docker --link
     private final static String DB_ENV_NAME = "MONGO_PORT";
@@ -119,4 +119,3 @@ This is an illustration of a fully working example of a *dockerized* web applica
 * https://docs.docker.com/userguide/dockervolumes/
 * http://howchoo.com/g/zdq5m2exmze/docker-persistence-with-a-data-only-container
 * https://docs.docker.com/userguide/dockerlinks/
-* 
