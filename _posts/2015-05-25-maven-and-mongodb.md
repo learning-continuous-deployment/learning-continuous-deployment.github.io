@@ -26,10 +26,11 @@ The build will copy `. /usr/src/app` and `RUN mvn install` so you can build and 
     docker build -t maven .
     docker run -it --name maven-script maven
 
-If a complete Dockerfile is inconvenient for your project you can run the maven Docker image directly:
+If a complete Dockerfile is inconvenient for your project you can run the Maven Docker image directly:
 
     docker run -it --rm --name maven-project -v "$PWD":/usr/src/maven-project -w /usr/src/maven-project maven:3.2-jdk-7 mvn clean install
 
+For our purpose it is not necessary to create a Maven Container, so we will just start the job via Jenkins and use its Maven Plugin to build the application through the pom-file. 
 
 ###Installation
 

@@ -9,13 +9,13 @@ author_name: Markus
 excerpt_separator: <!--more-->
 ---
 
-This blogpost provides a brief overview of the possibilities we have configuring Jenkins in order to automatically trigger essential build phases that are needed to setup an environment for docker containers.
+This post provides a brief overview of the possibilities we have configuring Jenkins in order to automatically trigger essential build phases that are needed to set up an environment for Docker Containers.
 <!--more-->
 
 ##Overview
-In our second Blogpost ["How to trigger a Jenkins build process by a GitHub push"](http://learning-continuous-deployment.github.io/jenkins/github/2015/04/17/github-jenkins/) we showed off how to configure Jenkins to get notice of new Github pushes that are coming in when we add new features or bugfixes to our project.
-Now it's time to configure Jenkins so that it reacts on those changes and triggers shell commands to build a new image and send it to our second server (as described in this [Blogpost](http://learning-continuous-deployment.github.io/docker/images/dockerfile/2015/04/24/exporting-docker-container/)) which will finally run the container and expose it to the public.
-It would be possible to install a docker plugin for Jenkins to achieve these tasks as well - they'd provide you with some user interface elements specifically for docker interactions. You can find them [here](https://wiki.jenkins-ci.org/dosearchsite.action?queryString=docker). But for our usecase we'll just stick with the shell commands.
+In our second post ["How to trigger a Jenkins build process by a GitHub push"](http://learning-continuous-deployment.github.io/jenkins/github/2015/04/17/github-jenkins/) we showed how to configure Jenkins to get notice of new GitHub pushes that are coming in when we add new features or bugfixes to our project.
+Now it's time to configure Jenkins so that it reacts on those changes and triggers shell commands to build a new image and send it to our second server (as described in this [post](http://learning-continuous-deployment.github.io/docker/images/dockerfile/2015/04/24/exporting-docker-container/)) which will finally run the container and expose it to the public.
+It would be possible to install a Docker plugin for Jenkins to achieve these tasks as well - they'd provide you with some user interface elements especially for Docker interactions. You can find them [here](https://wiki.jenkins-ci.org/dosearchsite.action?queryString=docker). But for our use case we will just stick with the shell commands.
 
 ##Triggering shell commands
 In your Jenkins project settings add a `new build step` and choose `run shell`.
@@ -54,7 +54,7 @@ Another solution would be to include ssh after the `$`, but this would clutter t
 
       docker stop $(docker ps -a --filter="name=csm" -q)
 
-`deleteAllImages`: This command is implemented to save disk space on the server by deleting unused images and containers - one of our images uses about 2.4 GB! The shell command is followed by `|| true` because we do not want any console output to fail our jenkins build. For example if there are no images to clean, this command will return a message we so not want to receive at this point. We can still see those messages in the Jenkins output console tough.
+`deleteAllImages`: This command is implemented to save disk space on the server by deleting unused images and containers - one of our images uses about 2.4 GB! The shell command is followed by `|| true` because we do not want any console output to fail our Jenkins build. For example if there are no images to clean, this command will return a message we so not want to receive at this point. We can still see those messages in the Jenkins output console tough.
 
       docker rm $(docker ps --no-trunc -aq)
       docker rmi $(docker images -q --filter "dangling=true")

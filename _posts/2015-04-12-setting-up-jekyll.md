@@ -11,7 +11,7 @@ Hi, this is the first post in our blog and the very first post which I'm writing
 
  <!--more-->
 
-As we are using GitHub as hosting servic for our Git repositories, we decided to use their offered service [GitHub Pages](https://pages.github.com) to create a Blog, with the advantage that we don't need an additional server to host this it. GitHub provides for each repository the oppertunity to build a website. For this, a new repository has to be created and named `NAME.github.io`, where *NAME* is your repository name (or username and organization name respectively when you want to create a website for yourself or for your organisation) on GitHub.
+As we are using GitHub as hosting service for our Git repositories, we decided to use their offered service [GitHub Pages](https://pages.github.com) to create a Blog, with the advantage that we don't need an additional server to host this. GitHub provides for each repository the opportunity to build a website. For this, a new repository has to be created and named `NAME.github.io`, where *NAME* is your repository name (or username and organization name respectively when you want to create a website for yourself or for your organisation) on GitHub.
 
 To build the actual Blog, we are using [Jekyll](http://jekyllrb.com). Jekyll is an open-source software to create static websites and it is supported by GitHub. The source-code of the Jekyll website is pushed into the GitHub repository and automatically build to a static website and published on the specified URL. To edit the blog, simply checkout the repository, edit the desired files, commit and push them back. That's it!
 
@@ -46,7 +46,7 @@ The attribute `banner_image` defines the image which is shown on the top. Here, 
 
 As mentioned above, posts are written in *markdown*. If you are not familiar with it, you can take a look at this [cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) containing all important commands.
 
-There are many online tools which provides a WYSIWGY editor. A good markdown editor is [Dillinger](http://dillinger.io). It has a preview window where you can see the interpreted markdown code.
+There are many online tools which provide a WYSIWGY editor. A good markdown editor is [Dillinger](http://dillinger.io). It has a preview window where you can see the interpreted markdown code.
 
 A special feature of Jekyll is code highlighting. Check out the source code of this post to see how it's done.
 
@@ -57,4 +57,4 @@ end
 print_hi('Tom')
 {% endhighlight %}
 
-When you're done writing the post. Commit and push the file into the repository and thats it.
+When you're done writing the post, just commit and push the file into the repository and that's it.

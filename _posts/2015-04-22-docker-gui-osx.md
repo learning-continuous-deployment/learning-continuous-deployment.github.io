@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How to get a GUI to a Docker container on OS X"
+title: "How to get a GUI to a Docker Container on OS X"
 date: 2015-04-22 09:59:00
 categories: docker images dockerfile
 banner_image: docker_on_osx_banner.jpg
@@ -21,7 +21,7 @@ On OS X there is the convenient possibility to install all necessary tools via H
     brew install docker
     brew install boot2docker
 
-Now you're ready to fire up the boot2docker vm with the docker engine:  
+Now you're ready to fire up the boot2docker VM with the docker engine:  
     
     boot2docker init
     boot2docker up
@@ -34,7 +34,7 @@ This starts an interactive session and gives you a shell in the container.
 
 ##How to get a GUI on OS X
 On a Linux host you can do pretty basic X11 forwarding. A guide on how to do it, can be found [here](http://fabiorehm.com/blog/2014/09/11/running-gui-apps-with-docker/) or [here](https://registry.hub.docker.com/u/batmat/docker-eclipse/).
-On OS X there is no comparable way of achiving this, __but__ there is a crude way to get a GUI for your Docker container. A discussion about the topic and the explanations of the smart people, who discovered that, can be found [here](https://github.com/docker/docker/issues/8710).   
+On OS X there is no comparable way of achieving this, __but__ there is a crude way to get a GUI for your Docker container. A discussion about the topic and the explanations of the smart people who discovered that, can be found [here](https://github.com/docker/docker/issues/8710).   
 
 You need socat, which is a command line based utility that establishes two bidirectional byte streams and transfers data between them, and XQuartz - Apples version of the X server.  
     
