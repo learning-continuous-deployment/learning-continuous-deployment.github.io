@@ -16,9 +16,10 @@ All descriptions, path names and so on refer to the used technologies, but we tr
 
 ##Solution Idea
 As already mentioned in the blogpost about volumes it is considered to be *best practice* to use a data-only container to store our database entries. So it would be enough to have two containers - one with the data and another one running the DBMS and the actual application (an example for this setup can be found [here](https://github.com/jbfink/docker-wordpress)). But for our use case this is not enough, because we want the maximum flexibility and therefore consider, that *multiple applications* should be able to access the database. This leads to the following division in containers: 
-1. __Data-only container__, which  references the volume [/data/db](http://docs.mongodb.org/manual/tutorial/manage-mongodb-processes/) (the default directory for storing data)
-2. __DB-Container__ running [mongod](http://docs.mongodb.org/manual/reference/program/mongod/), (the primary deamon process of MongoDB)
-3. __Application container__ running the business logic
+
+ 1. __Data-only container__, which  references the volume [/data/db](http://docs.mongodb.org/manual/tutorial/manage-mongodb-processes/) (the default directory for storing data)
+ 2. __DB-Container__ running [mongod](http://docs.mongodb.org/manual/reference/program/mongod/), (the primary deamon process of MongoDB)
+ 3. __Application container__ running the business logic
 
 This enables a separation of duties in a neat way and improves portability, reusability, maintainability and so on. 
 At the same time this division in separate containers brings up another problem. The containers have to be enabled to *communicate* with each other. But we will deal with that later.
