@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Get an app running in one command: Docker Compose"
+title:  "Docker Compose: Run a multi-container app in one command"
 date:   2015-05-30 20:30
 categories: docker, docker compose
 banner_image: compose.jpg
