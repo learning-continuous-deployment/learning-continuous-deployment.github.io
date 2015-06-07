@@ -2,7 +2,7 @@
 layout: post
 title:  "Docker Swarm for Clustering"
 date:   2015-06-07 15:00
-categories: docker swarm
+categories: DockerSwarm
 banner_image: swarm2.jpg
 comments: true
 author_name: Steffi
@@ -32,13 +32,13 @@ Each swarm node will run a swarm node agent. You can create a swarm cluster:
    
 This will return a unique cluster id, that you need to start the Swarm agent on a node. As a next step you need to log into each node and 
   
-1. To ensure that the docker remote API is available over TCP for the Swarm Manager, start the docker daemon:
+ 1. To ensure that the docker remote API is available over TCP for the Swarm Manager, start the docker daemon:
        $ docker -H tcp://0.0.0.0:2375 -d
 
-2. Register the Swarm agents, replace <node_ip> and <cluster_id> with your correct settings: 
+ 2. Register the Swarm agents, replace <node_ip> and <cluster_id> with your correct settings: 
         docker run -d swarm join --addr=<node_ip:2375> token://<cluster_id>
 	
-3. Start the Swarm manager on any machine with: 
+ 3. Start the Swarm manager on any machine with: 
        docker run -d -p <swarm_port>:2375 swarm manage token://<cluster_id>
   
 To check your configuration you can run `docker -H tcp://<manager_ip:manager_port> info`. You can use the regular docker CLI to access your nodes. Use [this link](https://docs.docker.com/swarm/API/) to check out the Docker Swarm API. To list all your nodes, use: 
