@@ -2,7 +2,7 @@
 layout: post
 title:  "Docker Compose: Run a multi-container app in one command"
 date:   2015-05-30 20:30
-categories: docker, docker compose
+categories: docker compose, multi app 
 banner_image: compose.jpg
 comments: true
 author_name: Steffi
