@@ -26,21 +26,21 @@ which will use the [official Docker image](https://registry.hub.docker.com/_/swa
  2. Run a command to start Swarm. 
  3. Run a command to join the cluster on each host where the Docker Engine is running. 
   
-Each swarm node will run a swarm node agent. You can create a swarm cluster: 
+Each swarm node will run a swarm node agent. You can create a swarm cluster by typing: 
 
     $ docker run --rm swarm create
    
-This will return a unique cluster id, that you need to start the Swarm agent on a node. As a next step you need to log into each node and 
-  
- 1. To ensure that the docker remote API is available over TCP for the Swarm Manager, start the docker daemon:
+This will return a unique cluster id, that you need to start the Swarm agent on a node. 
+
+The next steps require a login into each node. Firstyl you need to ensure that the docker remote API is available over TCP for the Swarm Manager, so you start the docker daemon:
     
 	$ docker -H tcp://0.0.0.0:2375 -d
 
- 2. Register the Swarm agents, replace <node_ip> and <cluster_id> with your correct settings: 
+Secondly you need to register the Swarm agents. Replace <node_ip> and <cluster_id> with your correct settings: 
     
 	docker run -d swarm join --addr=<node_ip:2375> token://<cluster_id>
 	
- 3. Start the Swarm manager on any machine with: 
+And as a last step you start the Swarm manager on any machine with: 
     
 	docker run -d -p <swarm_port>:2375 swarm manage token://<cluster_id>
   
