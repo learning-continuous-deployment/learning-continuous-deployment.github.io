@@ -32,11 +32,11 @@ Each swarm node will run a swarm node agent. You can create a swarm cluster by t
    
 This will return a unique cluster id, that you need to start the Swarm agent on a node. 
 
-The next steps require a login into each node. Firstyl you need to ensure that the docker remote API is available over TCP for the Swarm Manager, so you start the docker daemon:
+The next steps require a login into each node. Firstly you need to ensure that the docker remote API is available over TCP for the Swarm Manager, so you start the docker daemon:
     
 	$ docker -H tcp://0.0.0.0:2375 -d
 
-Secondly you need to register the Swarm agents. Replace <node_ip> and <cluster_id> with your correct settings: 
+Secondly you need to register the Swarm agents. Replace `<node_ip>` and `<cluster_id>` with your correct settings: 
     
 	docker run -d swarm join --addr=<node_ip:2375> token://<cluster_id>
 	
@@ -44,7 +44,11 @@ And as a last step you start the Swarm manager on any machine with:
     
 	docker run -d -p <swarm_port>:2375 swarm manage token://<cluster_id>
   
-To check your configuration you can run `docker -H tcp://<manager_ip:manager_port> info`. You can use the regular docker CLI to access your nodes. Use [this link](https://docs.docker.com/swarm/API/) to check out the Docker Swarm API. To list all your nodes, use: 
+To check your configuration you can run 
+
+    docker -H tcp://<manager_ip:manager_port> info 
+	
+You can use the regular docker CLI to access your nodes. Use [this link](https://docs.docker.com/swarm/API/) to check out the Docker Swarm API. To list all your nodes, use: 
 
     docker run --rm swarm list token://<cluster_id>
     
@@ -52,7 +56,7 @@ For example if you want to schedule a Redis container requiring 1 GB of memory, 
 
     $ docker run -d -P -m 1g redis
     
-By using constraints you can meet the specific requirments of each container. To run MySQL on a host with flash storage, simply put:
+By using constraints you can meet the specific requirements of each container. To run MySQL on a host with flash storage, simply put:
 
     docker run -d -e constraint:storage==ssd mysql 
 
