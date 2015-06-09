@@ -3,7 +3,7 @@ layout: post
 title:  "Maven and MongoDB: a short introduction"
 date:   2015-05-25 13:15
 categories: maven mongodb
-banner_image: maven_mongodb.png
+banner_image: maven_mongodb.jpg
 comments: true
 author_name: Steffi
 ---
