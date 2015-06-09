@@ -3,7 +3,7 @@ layout: post
 title:  "Getting started..."
 date:   2015-04-21 16:43:00
 categories: docker jenkins git
-banner_image: jenkins-docker.png
+banner_image: jenkins-docker.jpg
 comments: true
 author_name: Steffi
 ---

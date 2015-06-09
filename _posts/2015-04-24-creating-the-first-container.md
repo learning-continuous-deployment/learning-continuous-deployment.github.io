@@ -3,7 +3,7 @@ layout: post
 title:  "Creating the first Container on a Server"
 date:   2015-04-24 16:00:00
 categories: jenkins container dockerfile
-banner_image: docker-jenkins-git.png
+banner_image: docker-jenins.git.jpg
 comments: true
 author_name: Steffi, Marius, Markus
 ---
