@@ -3,7 +3,7 @@ layout: post
 title:  "Jenkins shell commands [Update]"
 date:   2015-05-24 17:18:00
 categories: docker jenkins
-banner_image: configuring_jenkins.png
+banner_image: configuring_jenkins.jpg
 comments: true
 author_name: Markus
 excerpt_separator: <!--more-->
