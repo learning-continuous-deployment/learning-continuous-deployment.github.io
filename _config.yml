@@ -35,7 +35,7 @@ theme:
   disqus_shortname: learningcontinuousdeployment
 
   # Google Analytics/Webmaster key, leave blank to ignore
-  google_analytics_key:
+  google_analytics_key: UA-57974988-2
   google_webmaster_key:
 
 # Build settings
