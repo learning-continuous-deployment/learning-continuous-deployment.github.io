@@ -11,6 +11,7 @@ author_name: Jan, Steffi, Markus, Marius
 In our blog *Learning Continuous Deployment* we wanted to show you the general basics how to develop *dockerized* apps and the benefits of using Docker. This post summarizes our learnings and gives our final conclusion. 
 
 <!--more--> 
+
 ##Containerization in general
 
 Docker offers a container based solution for virtualization. It encapsulates the application and its dependencies into a system and language-independent package, whereas your code runs in isolation from other containers but share the host's resources. Therefore you do not need a VM with an entire guest OS (overhead), but only your container to run your app. 
