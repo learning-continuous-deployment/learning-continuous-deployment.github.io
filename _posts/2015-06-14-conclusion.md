@@ -13,12 +13,18 @@ In our blog *Learning Continuous Deployment* we wanted to show you the general b
 <!--more--> 
 ##Containerization in general
 
-Docker offers a container based solution for virtualisation. It encapsulates the application and its dependencies into a system and language-independet package, whereas your code runs in isolation from other containers but share the host's resources. Therefore you do not need a VM with an entire guest OS (overhead), but only your container to run your app. 
+Docker offers a container based solution for virtualization. It encapsulates the application and its dependencies into a system and language-independent package, whereas your code runs in isolation from other containers but share the host's resources. Therefore you do not need a VM with an entire guest OS (overhead), but only your container to run your app. 
 
 ![Virtual Machines vs. Docker]({{site.url}}/assets/images/vm-docker.png)
 
 ##Docker's Technology
 Docker is based on Linux Containers (LXC).
+
+![Kernel features]({{site.url}}/assets/images/kernel-features.PNG)
+
+Namespaces help to isolate a workspace, so changes of a global resource are only visible for processes that are part of this Namespace. Cgroups help to distribute the available hardware resources (CPU, I/O, memory) to the processes and manages them. This abstraction layer simplifies the work with containers and its management which leads to portabilty, so you can easy share containers with machines. The reuse of containers is another important principle as well as the their version management.
+
+The Docker Engine is the virtualization technology. Docker uses a client-server architecture in which the user interacts with the Docker daemon (client interface). The daemon is responsible for build proccesses, running containers and their distribution. 
 
 ##Docker's use cases
 The slogan *build once, run anywhere* indicates many use cases for Docker application. It supports Continuous Integration as well as Continuous Delivery and Continuous Deployment. In our project we used Docker to provide a Continuous Deployment pipeline with Jenkins and GitHub. 
