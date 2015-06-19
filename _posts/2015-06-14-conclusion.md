@@ -12,9 +12,9 @@ In our blog *Learning Continuous Deployment* we wanted to show you the general b
 
 <!--more--> 
 
-Firstly we want to provide some information about Conainerization in general, whereupon we go straight to Docker's technology, its use cases and our projects. Last but not least we will show some tools and complex workflows and give you our final conclusion in the end. 
+Firstly we want to provide some information about Containerization in general, after which we go straight to Docker's technology, its use cases and our projects. Last but not least we will show some tools and complex workflows and give you our final conclusion in the end. 
 
-Please mind that this post is still under construction, sorry... 
+*Please mind that this post is still under construction, sorry...*
 ![This post is under construction]({{site.url}}/assets/images/construction.jpg)
 
 ##Containerization in general
@@ -24,13 +24,13 @@ Docker offers a container based solution for virtualization. It encapsulates the
 ![Virtual Machines vs. Docker]({{site.url}}/assets/images/vm-docker.png)
 
 ##Docker's Technology
-Docker is based on Linux Containers (LXC) to provide its leightweight virtualization technology. 
+Docker is based on Linux Containers (LXC) to provide its lightweight virtualization technology. 
 
 ![Kernel features]({{site.url}}/assets/images/kernel-features.PNG)
 
-Namespaces help to isolate a workspace, so changes of a global resource are only visible for processes that are part of this Namespace. Cgroups help to distribute the available hardware resources (CPU, I/O, memory) to the processes and manages them. This abstraction layer simplifies the work with containers and its management which leads to portabilty, so you can easy share containers with machines. The reuse of containers is another important principle as well as the their version management.
+Namespaces help to isolate a workspace, so changes of a global resource are only visible for processes that are part of this Namespace. Cgroups help to distribute the available hardware resources (CPU, I/O, memory) to the processes and manages them. This abstraction layer simplifies the work with containers and its management which leads to portability, so you can easy share containers with machines. The reuse of containers is another important principle as well as the their version management.
 
-The Docker Engine is the virtualization technology. Docker uses a client-server architecture in which the user interacts with the Docker daemon (client interface). The daemon is responsible for build proccesses, running containers and their distribution. 
+The Docker Engine is the virtualization technology. Docker uses a client-server architecture in which the user interacts with the Docker daemon (client interface). The daemon is responsible for build processes, running containers and their distribution. 
 
 ##Docker's use cases
 The slogan *build once, run anywhere* indicates many use cases for Docker application. It supports Continuous Integration as well as Continuous Delivery and Continuous Deployment. In our project we used Docker to provide a Continuous Deployment pipeline with Jenkins and GitHub. 
@@ -61,7 +61,7 @@ Docker is more lightweight than VMs and offers therefore a minimal overhead and 
 ###Advantages of Dockerized Apps
 Regarding dockerized apps Docker offers an easy versioning of the images, so you can simply upgrade / downgrade / switch to another version if necessary (e.g. if some dependencies have changed). 
 
-The immutable infrastructure of Docker provides abstraction, consistency and modularity. With immutable infrastructure we mean that the configuration state of an application won't be cahnged, neither in development, testing or production, so you will always have the same state, whereas the abstraction separates the operating system and its dependecies from the application and its dependencies. The provided consistency ensures that the tested code will be the code that will be eventually deployed and used in the productive system, so we can speak of *run as tested*. 
+The immutable infrastructure of Docker provides abstraction, consistency and modularity. With immutable infrastructure we mean that the configuration state of an application won't be changed, neither in development, testing or production, so you will always have the same state, whereas the abstraction separates the operating system and its dependencies from the application and its dependencies. The provided consistency ensures that the tested code will be the code that will be eventually deployed and used in the productive system, so we can speak of *run as tested*. 
 
 Another advantage of dockerized apps is the flexibility and portability, so that the software can run in different environments and isn't bound on any specific hardware or services. The flexibility allows to run many instances of the same application. 
 
@@ -71,7 +71,7 @@ Personally we could not find many disadvantages of Docker. But because there are
 ###Our conclusion
 The importance of virtualization technologies grows with an increasing speed. Containerization gains more and more attention because companies want to develop software faster, cheaper and better. Considering continuous integration, delivery or deployment, DevOps need to choose the right way for their own use case. 
 
-Docker is a great tool and supports the continuous deployment pipeline. It's got a good integration in already existing configuration managment tools. With its big and growing ecosystem it offers many use cases and we can be excited for more things to come! 
+Docker is a great tool and supports the continuous deployment pipeline. It's got a good integration in already existing configuration management tools. With its big and growing ecosystem it offers many use cases and we can be excited for more things to come! 
 
 ###Our personal achievements
 Our personal achievements in this project were to work effectively in a team with GitHub. We understood Jenkins and Container Virtualization with containerized applications, multi-apps and Volumes. Our sample projects helped us to dig deeper and we got some insights in the continuous deployment pipeline. 
