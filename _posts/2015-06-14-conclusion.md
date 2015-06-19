@@ -35,11 +35,13 @@ The Docker Engine is the virtualization technology. Docker uses a client-server 
 ##Docker's use cases
 The slogan *build once, run anywhere* indicates many use cases for Docker application. It supports Continuous Integration as well as Continuous Delivery and Continuous Deployment. In our project we used Docker to provide a Continuous Deployment pipeline with Jenkins and GitHub. 
 
+###Local development
 It is possible to use Docker containers for local development so it allows you to run GUI application inside a Docker container, e.g. NetBeans with all necessary dependencies. So you can share the container with other developers without any further setup. This speeds up and simplifies the process. 
 
+###DevOps
 Docker offers many advantages especially for DevOps. It eases the workstation deployment due to many application environments (dev, QA, production) and abstracts the complexity of configuration management. It can be combined with other infrastructure tools, e.g. Puppet or Chef. Docker is not supposed to replace these tools, so it easy to integrate Docker in these tools, e.g. you have an infrastructure based on Chef that builds your application and deploys it, you can use its cookbooks to the same thing in Docker, but with Docker's specific advantages. But if you don't use any other configuration management tools, you can simply rely on Docker. Furthermore Docker offers a great way to share, so Ops can produce Docker images - if necessary and Devs could help newbies to bootstrap. 
 
-##Testing
+###Testing
 For our Continuous Deployment pipeline the idea was that Jenkins commands the testing infrastructure to different docker applications - that run simultaneously and run tests in parallel. Why should you not just use Jenkins though? Because Docker provides you a clean environment for every fresh build and increases the speed of test cases (quick and easy to start a container). Because your application is *frozen* within a container it will always run as tested. Furthermore it is easy to switch to another version, e.g. if some dependencies have changed or you want to update or downgrade which will be achieved by simply using another container. Last but not least it is cheaper than running tests on several VM's. 
 
 ##Our continuous deployment workflow
