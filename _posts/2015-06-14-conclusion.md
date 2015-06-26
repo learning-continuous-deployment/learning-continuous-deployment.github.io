@@ -19,9 +19,11 @@ Firstly we want to provide some information about Containerization in general, a
 
 ##Containerization in general
 
-Docker offers a container based solution for virtualization. It encapsulates the application and its dependencies into a system and language-independent package, whereas your code runs in isolation from other containers but share the host's resources. Therefore you do not need a VM with an entire guest OS (overhead), but only your container to run your app. 
+Containerization offers a container based solution for virtualization. It encapsulates the application and its dependencies into a system and language-independent package, whereas your code runs in isolation from other containers but share the host's resources. Therefore you do not need a VM with an entire guest OS and its overhead due to not used resources, but only your container to run your app. 
 
 ![Virtual Machines vs. Docker]({{site.url}}/assets/images/vm-docker.png)
+
+Docker is that kind of a lightweight container based solution for virtualization. Comparing the start and stop times of Docker to VMs we see a significant difference, where VMs need 30-45s to start, 5-10s to stop. Docker is in the start time about 600 times faster and in the stop time about 100 times. Both times you will only need about 50ms. 
 
 ##Docker's Technology
 Docker is based on Linux Containers (LXC) to provide its lightweight virtualization technology. 
@@ -33,16 +35,21 @@ Namespaces help to isolate a workspace, so changes of a global resource are only
 The Docker Engine is the virtualization technology. Docker uses a client-server architecture in which the user interacts with the Docker daemon (client interface). The daemon is responsible for build processes, running containers and their distribution. 
 
 ##Docker's use cases
-The slogan *build once, run anywhere* indicates many use cases for Docker application. It supports Continuous Integration as well as Continuous Delivery and Continuous Deployment. In our project we used Docker to provide a Continuous Deployment pipeline with Jenkins and GitHub. 
+As we know now, it is quite easy to create container with Docker. The slogan *build once, run anywhere* indicates many use cases for Docker application. It supports Continuous Integration as well as Continuous Delivery and Continuous Deployment, so to automate as much as you can in your development pipeline. 
+
+In the step *Build* you build your app with a Docker container and can use any language or any tools. It will be guaranteed that you get a clean and safe environment for your application with all its necessary dependencies and packages. The created container can be delivered anywhere in its *Shipping* process without breaking anything. So it's quite easy to ship your container to the Quality Assurance, other team members or to a Cloud. Furthermore the portability is guaranteed and the further process of test automation or integration is simplified. In the *Run* step your application is running in a Docker container where compatibility is guaranteed. 
 
 ###Local development
-It is possible to use Docker containers for local development so it allows you to run GUI application inside a Docker container, e.g. NetBeans with all necessary dependencies. So you can share the container with other developers without any further setup. This speeds up and simplifies the process. 
-
-###DevOps
-Docker offers many advantages especially for DevOps. It eases the workstation deployment due to many application environments (dev, QA, production) and abstracts the complexity of configuration management. It can be combined with other infrastructure tools, e.g. Puppet or Chef. Docker is not supposed to replace these tools, so it easy to integrate Docker in these tools, e.g. you have an infrastructure based on Chef that builds your application and deploys it, you can use its cookbooks to the same thing in Docker, but with Docker's specific advantages. But if you don't use any other configuration management tools, you can simply rely on Docker. Furthermore Docker offers a great way to share, so Ops can produce Docker images - if necessary and Devs could help newbies to bootstrap. 
+It is possible to use Docker containers for local development so it allows you to run GUI application inside a Docker container, e.g. NetBeans with all necessary dependencies. This implies that you don't need to install everything on your machine if you need it e.g. for only one project. Furthermore you can share the container with other developers without any further setup. This speeds up and simplifies the process. 
 
 ###Testing
-For our Continuous Deployment pipeline the idea was that Jenkins commands the testing infrastructure to different docker applications - that run simultaneously and run tests in parallel. Why should you not just use Jenkins though? Because Docker provides you a clean environment for every fresh build and increases the speed of test cases (quick and easy to start a container). Because your application is *frozen* within a container it will always run as tested. Furthermore it is easy to switch to another version, e.g. if some dependencies have changed or you want to update or downgrade which will be achieved by simply using another container. Last but not least it is cheaper than running tests on several VM's. 
+For our Continuous Deployment pipeline the idea was that Jenkins commands the testing infrastructure to different docker applications - that run simultaneously and run tests in parallel. Why should you not just use Jenkins though? Because Docker provides you a clean environment for every fresh build and increases the speed of test cases (quick and easy to start a container). This means that you can simulate your later productive system. And because your application is *frozen* within a container it will always run as tested. Furthermore it is easy to switch to another version, e.g. if some dependencies have changed or you want to update or downgrade which will be achieved by simply using another container. Last but not least it is cheaper than running tests on several VM's because you maybe only need one VM but can run several containers with several test cases in it. 
+
+###DevOps
+Docker offers many advantages especially for DevOps, so to develop and deploy software faster and in better quality. The phrase *Configure once... Run anything*  indicates Dockers advantages. With its isolation, lightweight solution and speed in building distributed systems, it eases the workstation deployment and the development lifecycle gets more efficent, consistent and repeatable.
+
+It can be easily combined with other infrastructure tools, e.g. Puppet or Chef, whereas Docker is not supposed to replace these tools, but to integrate itself in these tools. If you have already e.g. an infrastructure based on Chef that builds your application and deploys it, you can use docker cookbooks to install docker and run containers within the Chef configuration management workflow. But if you don't use any other configuration management tools, you can simply rely on Docker. Furthermore Docker offers a great way to share, so Ops can produce Docker images - if necessary and Devs could help newbies to bootstrap. 
+
 
 ##Our continuous deployment workflow
 Our [first project](http://learning-continuous-deployment.github.io/) showed how to trigger a Jenkins job by a GitHub push that creates images and containers. The new containers will be pushed to our Docker server that runs the container.
@@ -70,13 +77,15 @@ Another advantage of dockerized apps is the flexibility and portability, so that
 ###Disadvantages
 Personally we could not find many disadvantages of Docker. But because there are many beta tools so far (e.g. Swarm), orchestration needs to be provided by other tools to make your application scalable. Docker has got a big growing ecosystem, so it can take a while for you to find the right tools to combine Docker with. Although Docker is easy to learn, we needed some time to be really into it. 
 
+__But__ there is a need to say that there are some serious security concerns as e.g. the possibility of escaping the 'jail'. There are many posts from Docker as well and they seem to work hard on fixing all the security concerns many people have mentioned. Another point is the problem with security bugs in existing images on DockerHub. If you use an existing image, please check it first and make sure it can't be affected by *Heartbleed* or any other bugs anymore.
+
 ###Our conclusion
 The importance of virtualization technologies grows with an increasing speed. Containerization gains more and more attention because companies want to develop software faster, cheaper and better. Considering continuous integration, delivery or deployment, DevOps need to choose the right way for their own use case. 
 
 Docker is a great tool and supports the continuous deployment pipeline. It's got a good integration in already existing configuration management tools. With its big and growing ecosystem it offers many use cases and we can be excited for more things to come! 
 
-###Our personal achievements
-Our personal achievements in this project were to work effectively in a team with GitHub. We understood Jenkins and Container Virtualization with containerized applications, multi-apps and Volumes. Our sample projects helped us to dig deeper and we got some insights in the continuous deployment pipeline. 
+###Our insights and personal achievements
+Our personal achievements in this project were to work effectively in a team with GitHub. We setup a Jenkins server and triggered several jobs with it. Furthermoe we understood the importance of virtualization __and__ containerization. Docker offers many advantages and we learned how to create containerized applications, multi-apps and volumes. Our sample projects helped us to dig deeper and we got some insights in the continuous deployment pipeline. 
 
 ###Useful Sources
 
