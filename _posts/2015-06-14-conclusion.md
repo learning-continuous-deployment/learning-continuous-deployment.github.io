@@ -3,7 +3,7 @@ layout: post
 title:  "Docker in a nutshell: our conclusion"
 date:   2015-06-14 12:00
 categories: Docker Conclusion
-banner_image: 
+banner_image: retrospection.jpg
 comments: true
 author_name: Jan, Steffi, Markus, Marius
 ---
