@@ -26,13 +26,13 @@ Containerization offers a container based solution for virtualization. It encaps
 Docker is that kind of a lightweight container based solution for virtualization. Comparing the start and stop times of Docker to VMs we see a significant difference, where VMs need 30-45s to start, 5-10s to stop. Docker is in the start time about 600 times faster and in the stop time about 100 times. Both times you will only need about 50ms. 
 
 ##Docker's Technology
-Docker is based on Linux Containers (LXC) to provide its lightweight virtualization technology. 
+Docker is based on some features - namely namespaces and cgroups - of the Linux Kernel. It provides Linux containers (LXC) oder its own implementation libcontainer as *container formats*. So it is able to provide lightweight operating system virtualization technology. 
 
 ![Kernel features]({{site.url}}/assets/images/kernel-features.PNG)
 
-Namespaces help to isolate a workspace, so changes of a global resource are only visible for processes that are part of this Namespace. Cgroups help to distribute the available hardware resources (CPU, I/O, memory) to the processes and manages them. This abstraction layer simplifies the work with containers and its management which leads to portability, so you can easy share containers with machines. The reuse of containers is another important principle as well as the their version management.
+On the one hand namespaces abstract a global resource in an isolated instance and builds so isolated workspaces. Changes of a resource are only visible for processes, that are part of the same namespace. Cgroups on the other hand help to distribute the available hardware resources (CPU, I/O, memory,...) to the processes and manages them. Effectively containerization is possible without the use of Docker, but Docker provides another abstraction layer, which simplifies the work with containers and its management by the usage of its engine. The Docker engine leads to portability,  so you can easy share containers with other machines, and application centric containers. Furtheron automatic building and reuse of containers are another important aspects. The last but not least advantage of the use of Docker is its version management, which the utilization of the union file systems provides.
 
-The Docker Engine is the virtualization technology. Docker uses a client-server architecture in which the user interacts with the Docker daemon (client interface). The daemon is responsible for build processes, running containers and their distribution. 
+The already mentioned Docker Engine is basically all the virtualization technology and utilities. Docker uses a client-server architecture, in which the user interacts with the Docker daemon (through the commandline interface on the client). The daemon is responsible for building images, running containers and their distribution. 
 
 ##Docker's use cases
 As we know now, it is quite easy to create container with Docker. The slogan *build once, run anywhere* indicates many use cases for Docker application. It supports Continuous Integration as well as Continuous Delivery and Continuous Deployment, so to automate as much as you can in your development pipeline. 
@@ -55,8 +55,7 @@ It can be easily combined with other infrastructure tools, e.g. Puppet or Chef, 
 Our [first project](http://learning-continuous-deployment.github.io/) showed how to trigger a Jenkins job by a GitHub push that creates images and containers. The new containers will be pushed to our Docker server that runs the container.
 
 ##Docker and persistence
-Our [second project](http://learning-continuous-deployment.github.io/docker/images/dockerfile/database/persistence/volumes/linking/container/2015/05/29/docker-and-databases/) showed how to achieve persistence in Docker containers by using [Volumes]((http://learning-continuous-deployment.github.io/docker/container/volumes/2015/05/22/persistent-data-with-docker/)). Volumes can be used to mount directories or files from your host machine inside a container. It can be used to create dir which exists as a 
-normal* dir. 
+Our [second project](http://learning-continuous-deployment.github.io/docker/images/dockerfile/database/persistence/volumes/linking/container/2015/05/29/docker-and-databases/) showed how to achieve persistence in Docker containers by using [Volumes]((http://learning-continuous-deployment.github.io/docker/container/volumes/2015/05/22/persistent-data-with-docker/)). Volumes can be used to mount directories or files from your host machine inside a container or to create directories, which can be shared among containers. The concept of data-only containers leads to a neat separation of duties and enables one to store persistent data. 
 
 ##Tools and complex workflows 
 Regarding Orchestration it is necessary to have a convenient management of a large number of containers, so to manage applications across multiple containers and hosts. There are several tools from Docker to orchestrate your application. [Docker Compose](http://learning-continuous-deployment.github.io/dockercompose/multi-app/2015/05/30/docker-compose/) allows you to run your stack with only one command and describe your multi-app with one file. [Docker Swarm](http://learning-continuous-deployment.github.io/dockerswarm/2015/06/07/docker-swarm/) helps to cluster your application in a distributed environment. It pools several Docker Engines and exposes them as a single virtual Docker engine. 
@@ -77,7 +76,7 @@ Another advantage of dockerized apps is the flexibility and portability, so that
 ###Disadvantages
 Personally we could not find many disadvantages of Docker. But because there are many beta tools so far (e.g. Swarm), orchestration needs to be provided by other tools to make your application scalable. Docker has got a big growing ecosystem, so it can take a while for you to find the right tools to combine Docker with. Although Docker is easy to learn, we needed some time to be really into it. 
 
-__But__ there is a need to say that there are some serious security concerns as e.g. the possibility of escaping the 'jail'. There are many posts from Docker as well and they seem to work hard on fixing all the security concerns many people have mentioned. Another point is the problem with security bugs in existing images on DockerHub. If you use an existing image, please check it first and make sure it can't be affected by *Heartbleed* or any other bugs anymore.
+__But__ there is a need to say that there are some serious security concerns as e.g. the possibility of escaping the 'jail'. There are many posts from Docker as well and they seem to work hard on fixing all the security concerns many people have mentioned. Another point is the problem with security bugs in existing images on DockerHub. If you use an existing image, please check it first and make sure it can't be affected by *Heartbleed* or any other bugs anymore. So at the moment you still have to be very careful to run Docker containers in production environments. 
 
 ###Our conclusion
 The importance of virtualization technologies grows with an increasing speed. Containerization gains more and more attention because companies want to develop software faster, cheaper and better. Considering continuous integration, delivery or deployment, DevOps need to choose the right way for their own use case. 
@@ -85,7 +84,7 @@ The importance of virtualization technologies grows with an increasing speed. Co
 Docker is a great tool and supports the continuous deployment pipeline. It's got a good integration in already existing configuration management tools. With its big and growing ecosystem it offers many use cases and we can be excited for more things to come! 
 
 ###Our insights and personal achievements
-Our personal achievements in this project were to work effectively in a team with GitHub. We setup a Jenkins server and triggered several jobs with it. Furthermoe we understood the importance of virtualization __and__ containerization. Docker offers many advantages and we learned how to create containerized applications, multi-apps and volumes. Our sample projects helped us to dig deeper and we got some insights in the continuous deployment pipeline. 
+Our personal achievements in this project were to work effectively in a team with GitHub. We setup a Jenkins server and triggered several jobs with it. Furthermoe we understood the importance of virtualization and especially containerization. Docker offers many advantages and we learned how to create containerized applications and also multi-container-apps. Our sample projects helped us to dig deeper and we got some insights in the continuous deployment pipeline and the applicability of Docker containers in cloud environments. 
 
 ###Useful Sources
 
