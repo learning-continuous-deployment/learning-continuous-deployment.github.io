@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Hi, we are a handful of students
   and wanna have some fun with continuous deployment. :-)
 baseurl: # the subpath of your site, e.g. /blog/
-url: "http://learning-continuous-deployment.github.io" # the base hostname & protocol for your site
+url: "https://learning-continuous-deployment.github.io" # the base hostname & protocol for your site
 logourl: # /assets/images/logo.png # Site logo
 author:
 author_thumbnail: /assets/images/hdm-logo.png # Author avatar
