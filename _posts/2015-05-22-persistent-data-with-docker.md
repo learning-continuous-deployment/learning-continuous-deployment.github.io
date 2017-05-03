@@ -10,10 +10,10 @@ author_name: Jan
 In this post we are going to have a look at working with data storage in and outside of containers. After reading you will have a basic understanding of Docker volumes and you will know how to achieve persistent data storage. 
 <!--more-->
 
-###Introduction 
+### Introduction 
 You probably read this post, because you think that Docker's concept of packaging small containers running a single process for only a limited amount of time, is quite contradictory with persistent data. At the first glimpse this true, but if you get the idea of using [Volumes](http://crosbymichael.com/advanced-docker-volumes.html), then you will realize, that there is an elegant solution to the persistence problem, which regards the single responsibility principle.
 
-###Volumes
+### Volumes
 In the Docker ecosystem a volume can be a directory __outside__ the root file system of the container. You can add a data volume by specifying the `-v` option in the Docker `docker run` command. Volumes are intended to provide persistence for your data, which is completely independent of the container's lifecycle. Therefore Docker volumes will not be deleted when you remove the container. Furthermore they won't get garbage collected. 
 Under the hood the `-v`option creates a volume in `/var/lib/docker/volumes` (on the host's file system) where all the data will be stored.
 
@@ -32,7 +32,7 @@ will give you a shell to a Ubuntu based container, where the host directory `/ho
 
 Sometimes this can be pretty handy, __but__ mounting a host directory is of course host-dependent and the storage location is not under Docker's control. Another important aspect is, that volumes are container specific, so when working with volumes we loose the portability and the ability to share Docker images. If there are some chunks of data which should persist between two containers, someone __must__ map them manually. Therefore we need another approach. 
 
-###Adding a volume to your container
+### Adding a volume to your container
 As mentioned above, we can create a new volume in the container which can then be imported into another container. Let's start simple and create a new volume: 
 
     docker run -v /data ubuntu
@@ -40,7 +40,7 @@ As mentioned above, we can create a new volume in the container which can then b
 
 This will create a new volume inside the container at `/data`. Be aware that you can mount multiple volumes. You can achieve the same result by using the `VOLUME` keyword in the Dockerfile. Such volumes on it's own can't solve the *persistence problem*, but lead to the idea of [data-only containers](http://container42.com/2013/12/16/persistent-volumes-with-docker-container-as-volume-pattern/). 
 
-##Data Volume Containers
+## Data Volume Containers
 The most elegant way to share data between containers is the concept of the so-called *data volume containers* which are simple containers running on a barebone image and doing basically nothing, but exposing a volume. This approach perfectly regards the single responsibility principle and is said to work best for production. 
 So it is a super simple data-only container:     
 
@@ -61,7 +61,7 @@ This will write a file to the `/datastore`-volume of `datacontainer`. To double 
 
 Another fact you should have noticed is that the data-only containers don't need to be running, they just have to exist. To remove the volume and delete the data, you have to explicitly call `docker rm -v` on the last container, which references the volume. 
 
-###References:
+### References:
 * http://www.offermann.us/2013/12/tiny-docker-pieces-loosely-joined.html 
 * http://crosbymichael.com/advanced-docker-volumes.html 
 * http://container42.com/2013/12/16/persistent-volumes-with-docker-container-as-volume-pattern/

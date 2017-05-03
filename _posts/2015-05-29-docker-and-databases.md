@@ -10,11 +10,11 @@ author_name: Jan
 So lately you read about volumes, sharing data and achieving persistence when working with ephemeral Docker containers. In the following blogpost we use this knowledge to build a dockerized web application. You will learn how to compose the single tiers and how to to link the single containers together.
 <!--more-->
 
-##Introduction 
+## Introduction 
 The task is to *containerize* a web application using Docker and achieve persistence with ephemeral containers. For this purpose we created a sample project to illustrate that, the pitfalls and the solution. The source code can be found [on Github](https://github.com/learning-continuous-deployment/java-mongodb-sample). You will recognize, that the sample is super basic, because we wanted to minimize distractions. It uses Java for the business logic and the connection to a MongoDB, which functions as datastore.
 All descriptions, path names and so on refer to the used technologies, but we tried to keep it as unspecific as possible.
 
-##Solution Idea
+## Solution Idea
 As already mentioned in the blogpost about volumes it is considered to be *best practice* to use a data-only container to store our database entries. So it would be enough to have two containers - one with the data and another one running the DBMS and the actual application (an example for this setup can be found [here](https://github.com/jbfink/docker-wordpress)). But for our use case this is not enough, because we want the maximum flexibility and therefore consider, that *multiple applications* should be able to access the database. This leads to the following division in containers: 
 
  1. __Data-only container__, which  references the volume [/data/db](http://docs.mongodb.org/manual/tutorial/manage-mongodb-processes/) (the default directory for storing data)
@@ -24,7 +24,7 @@ As already mentioned in the blogpost about volumes it is considered to be *best 
 This enables a separation of duties in a neat way and improves portability, reusability, maintainability and so on. 
 At the same time this division in separate containers brings up another problem. The containers have to be enabled to *communicate* with each other. But we will deal with that later.
 
-###A detailed look on the containers
+### A detailed look on the containers
 Before we can deal with the linkage and deployment of the containers, we need to understand them and therefore have a detailed look on the [images](https://docs.docker.com/userguide/dockerimages/) they are based on.
 
 For the data-only container we don't have to use a Dockerfile. It functions as a plain datastore and therefore it is enough to use a base image (e.g. 'ubuntu') and create the volume via the `-v` - flag. 
@@ -66,14 +66,14 @@ This time we use the Dockerhub to pull an image, where the OpenJDK Java 8 Runtim
 So far so good, but when someone tries to run this application container he will get an `com.mongodb.MongoSocketOpenException: Exception opening socket`, because the application tries to access port 27017 on the localhost, where he expects the `mongod` by default.  
 So it is still crucial to introduce one container to the other and enable them to *communicate*.  
 
-###Solutions for linking
+### Solutions for linking
 This procedure is called __linking__ and is not as hard as you might expect. Actually there are two possible ways to achieve dataflow between two or more containers.
 1. Use exposed IP ports and connect via them. 
 2. Use `--link` - flag in recent docker versions.  
 
 The second option also uses exposed ports, port forwarding and such things, but Docker takes care of the *dirty* work with network interfaces and so on. General and extensive information about linking containers can be found [in the documentation](https://docs.docker.com/userguide/dockerlinks/). But we will cover all necessary steps in the following sections.
 
-####Linking via `--link`
+#### Linking via `--link`
 As already mentioned this is the cleanest way of achieving the connection of two services. 
 By specifying the `--link` - flag in the `run`-command Docker sets up environmental variables for the exposed ports. This allows the second container to dynamically adjust its networking settings without explicit port forwarding or fiddling around with IPs. By specifying `--link` with the parameters `<name of running container>:<alias`> we establish such a link. 
 
@@ -109,11 +109,11 @@ For the connection to the database only one environment variable is of interest.
 		[...]
 	}
 
-###Final words
+### Final words
 This is an illustration of a fully working example of a *dockerized* web application with a MongoDB as persistent data storage. Each functionality is encapsulated and can be easily exchanged and updated. Like in the last sample project we created an automated deployment workflow, which is super convenient and fast, where a `git push` triggers the build and deployment of the application container. 
 
 
-###References:
+### References:
 * https://blog.codecentric.de/en/2014/01/docker-networking-made-simple-3-ways-connect-lxc-containers/
 * http://stackoverflow.com/questions/19948149/can-i-run-multiple-programs-in-a-docker-container 
 * https://docs.docker.com/userguide/dockerlinks/
