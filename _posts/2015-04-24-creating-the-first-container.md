@@ -136,7 +136,7 @@ Please note that the command ends with a dot. This is the working directory whic
 * If you want to test whether your container is working at all, you could try starting it through a shell first with `docker build -f "$WORKSPACE/Dockerfile" -t "csm_$BUILD_ID" $WORKSPACE`. Commands with `$` in front are environment variables from Jenkins. `f` indicates the file name which can be found in our project workspace. `t` stands for the repository name for the image. The Docker commands can be found [here](https://docs.docker.com/reference/commandline/cli/).
 * Instead using the shell we would like to use the provided Docker plugin functions such as "Execute Docker Container", which will be described here *soon*.  
 
-##Troubleshooting
+## Troubleshooting
 1. Avoid spaces in your Jenkins project name.
 2. If you want to change the language in Jenkins simply change it in your browser. For Firefox use e.g. the add-on [Quick Locale Switcher](https://addons.mozilla.org/en-US/firefox/addon/quick-locale-switcher/).
 3. If you want to start a docker container through a shell script, you need to be an administrator, however `sudo` will not work. So it is required to create a docker group if it does not already exist.

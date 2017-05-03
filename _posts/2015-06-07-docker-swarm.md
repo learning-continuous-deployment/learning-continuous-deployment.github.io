@@ -12,7 +12,7 @@ In a distributed environment things can get quite complicated when you have to d
 
 <!--more-->
 
-##Setup
+## Setup
 
 [Docker Swarm](https://docs.docker.com/swarm/) allows you to manage a resource pool of Docker hosts and schedule containers automatically managing workload. But keep in mind that it is as well as [Docker Compose](http://learning-continuous-deployment.github.io/docker,/docker/compose/2015/05/30/docker-compose/) still in beta. Do not use it in production yet, things are still likely to change! 
 

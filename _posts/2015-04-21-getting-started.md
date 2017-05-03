@@ -31,7 +31,7 @@ Thus your application can be deployed as a Docker Container. Docker files are re
 [DockerHub](https://hub.docker.com) is the public repository of all Docker images that can be pulled. Any user can push images as well but needs to be registered on Docker. 
 
 
-###Installation
+### Installation
 
 There is a well documented [installation guide](https://docs.docker.com/installation/#installation) on the Docker website itself. To get to know the first commands you could also go through their [tutorial](https://www.docker.com/tryit/#).
 
@@ -55,7 +55,7 @@ Our general continuous deployment workflow will look like the following:
 
 In general Jenkins monitors the execution of predefined jobs, such as testing or building software projects. Therefore Jenkins is a popular tool for continuous integration especially considering the execution with automated tests. It provides a continuous integration system to make it easier to integrate changes for a fresh build. Due to build automation the productivity will be increased. There are many free plugins to use and furthermore it is quite flexible and easy to adapt to your own purposes. 
 
-###Installation
+### Installation
 
 You will need a JRE 1.6 or later. As we are using a Debian-based distribution, we could [install Jenkins](https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Ubuntu) through apt-get by simply putting these lines in the terminal on our server:
 
